@@ -13,8 +13,8 @@ namespace The_Mission
 {
     public class Player : Motion
     {
+        private Rectangle player;
         private Weapon equippedWeapon;
-
         private Random random = new Random();
 
         public int HitPoints { get; private set; }
@@ -31,12 +31,13 @@ namespace The_Mission
             }
         }
 
-        public Player(Game game, Point location, Canvas boundaries, Rectangle player)
+        public Player(Game game, Point location, Canvas boundaries, Rectangle playerBox)
             : base(game, location)
         {
             HitPoints = 10;
 
             // Creates the player into stage
+            player = playerBox;
             player.Tag = "player";
             player.Width = 80;
             player.Height = 103;

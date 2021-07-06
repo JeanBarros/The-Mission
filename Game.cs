@@ -43,10 +43,11 @@ namespace The_Mission
         public void Move(Rectangle playerBox, Direction direction, Random random)
         {
             player.Move(playerBox, direction);
-            //foreach (Enemy enemy in Enemies)
-            //{
-            //    enemy.Move(random);
-            //}
+
+            foreach (Enemy enemy in Enemies)
+            {
+                enemy.Move(random);
+            }
         }
 
         public void Equip(string weaponName)
@@ -80,20 +81,23 @@ namespace The_Mission
 
         private Point GetRandomLocation(Random random)
         {
-            return new Point(Canvas.GetLeft(boundaries) +
-                random.Next((int)(Canvas.GetRight(boundaries) / 10 - Canvas.GetLeft(boundaries) / 10)) * 10, // X
-                (int)(Canvas.GetTop(boundaries) + 
-                random.Next((int)(Canvas.GetBottom(boundaries) / 10 - Canvas.GetTop(boundaries) / 10))) * 10);// Y
+            //return new Point(Canvas.GetLeft(boundaries) +
+            //    random.Next((int)(Canvas.GetRight(boundaries) / 10 - Canvas.GetLeft(boundaries) / 10)) * 10, // X
+            //    (int)(Canvas.GetTop(boundaries) + 
+            //    random.Next((int)(Canvas.GetBottom(boundaries) / 10 - Canvas.GetTop(boundaries) / 10))) * 10);// Y
+
+            return
+            new Point(Canvas.GetLeft(boundaries) + 10, Canvas.GetTop(boundaries) + 70);
         }
 
-        public void NewLevel(Random random)
+        public void NewLevel(/*Random random*/ Rectangle batBox)
         {
             level++;
             switch (level)
             {
                 case 1:
                     Enemies = new List<Enemy>() {
-                        new Bat(this, GetRandomLocation(random)),
+                        new Bat(this, GetRandomLocation(random), batBox),
                     };
                     WeaponInRoom = new Sword(this, GetRandomLocation(random));
                     break;

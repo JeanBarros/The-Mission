@@ -75,6 +75,7 @@
                             <Image Source="Assets/Images/ghost.png" Width="80"/>
                             <Image Source="Assets/Images/zombie.png" Width="70"/>
                             <Rectangle Name="playerBox" Width="80" Height="103" Fill="Yellow" Canvas.Left="220" Canvas.Top="144" Stroke="Red" StrokeThickness="2"/>
+                            <Rectangle Name="batBox" Width="50" Height="50" Fill="#FF47422E" Stroke="GreenYellow" StrokeThickness="2"/>
                             <!--<Rectangle Name="player" Width="71" Height="100" Fill="Yellow" />-->
                         </Canvas>
                     </Border>

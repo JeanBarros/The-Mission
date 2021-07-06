@@ -34,7 +34,7 @@ namespace The_Mission
             lblEnemy3.Content = "Zombie: ";
 
             game = new Game(Room, playerBox);
-            //game.NewLevel(random);
+            game.NewLevel(batBox);
         }
 
         public void UpdateCharacters()
@@ -65,6 +65,7 @@ namespace The_Mission
         private void btnMoveUp_Click(object sender, RoutedEventArgs e)
         {
             game.Move(playerBox, Motion.Direction.Up, random);
+            UpdateCharacters();
         }
 
         private void btnMoveRight_Click(object sender, RoutedEventArgs e)
@@ -76,11 +77,13 @@ namespace The_Mission
         private void btnMoveDown_Click(object sender, RoutedEventArgs e)
         {
             game.Move(playerBox, Motion.Direction.Down, random);
+            UpdateCharacters();
         }
 
         private void btnMoveLeft_Click(object sender, RoutedEventArgs e)
         {
             game.Move(playerBox, Motion.Direction.Left, random);
+            UpdateCharacters();
         }
     }
 }
