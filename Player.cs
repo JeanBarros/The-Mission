@@ -31,8 +31,8 @@ namespace The_Mission
             }
         }
 
-        public Player(Game game, Point location, Canvas boundaries, Rectangle playerBox)
-            : base(game, location)
+        public Player(Game game, /*Point location,*/ Canvas boundaries, Rectangle playerBox)
+            : base(game/*, location*/)
         {
             HitPoints = 10;
 

@@ -33,7 +33,7 @@ namespace The_Mission
             lblEnemy2.Content = "Ghost: ";
             lblEnemy3.Content = "Zombie: ";
 
-            game = new Game(Room, playerBox);
+            game = new Game(Stage, playerBox);
             game.NewLevel(batBox);
         }
 

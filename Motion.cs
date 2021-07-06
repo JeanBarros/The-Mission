@@ -22,25 +22,33 @@ namespace The_Mission
             Right
         }
 
-        public Motion(Game game, Point location)
+        public Motion(Game game/*, Point location*/)
         {
             this.game = game;
-            this.location = location;
+            //this.location = location;
         }
 
         public bool Nearby(Point locationToCheck, int distance)
         {
-            if (Math.Abs(location.X - locationToCheck.X) < distance &&
-            (Math.Abs(location.Y - locationToCheck.Y) < distance))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            //if (Math.Abs(location.X - locationToCheck.X) < distance &&
+            //(Math.Abs(location.Y - locationToCheck.Y) < distance))
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+            return true;
         }
-        
+
+        /// <summary>
+        /// Moves the PLAYER to a DIRECTION within the LIMITS of the dungeon. 
+        /// </summary>
+        /// <param name="playerBox"></param>
+        /// <param name="direction"></param>
+        /// <param name="boundaries"></param>
+        /// <returns></returns>
         public Point Move(Rectangle playerBox, Direction direction, Canvas boundaries)
         {
             Point newLocation = location;

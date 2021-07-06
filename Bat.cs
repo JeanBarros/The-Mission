@@ -17,7 +17,7 @@ namespace The_Mission
         private Random random = new Random(); 
         
         public Bat(Game game, Point location, Rectangle batBox)
-            : base(game, location, 6)
+            : base(game, 6)
         {
             // Creates the bat into stage
             bat = batBox;

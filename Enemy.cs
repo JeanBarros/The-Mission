@@ -22,8 +22,8 @@ namespace The_Mission
             }
         }
 
-        public Enemy(Game game, Point location, int hitPoints)
-        : base(game, location) 
+        public Enemy(Game game, int hitPoints)
+        : base(game) 
         { 
             HitPoints = hitPoints; 
         }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="The Mission" Height="650" ResizeMode="NoResize" Width="940">
 
-    <Canvas x:Name="Stage" Focusable="True">
+    <Canvas Focusable="True">
         <Canvas.Background>
             <ImageBrush ImageSource="dungeon01.jpg"/>
         </Canvas.Background>
@@ -67,7 +67,7 @@
                 </Grid>
                 <Grid Grid.Column="1">
                     <Border Padding="10,10,0,0">
-                        <Canvas x:Name="Room" Background="#7F363636" Margin="63,0,33,10">
+                        <Canvas x:Name="Stage" Background="#7F363636" Margin="63,0,33,10">
                             <!--<Image Source="Assets/Images/sword.png" Width="70"/>
                                 <Image Source="Assets/Images/flail.png" Width="50"/>
                                 <Image Source="Assets/Images/bow.png" Width="50"/>

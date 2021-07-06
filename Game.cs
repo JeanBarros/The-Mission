@@ -37,7 +37,7 @@ namespace The_Mission
         {
             this.boundaries = boundaries;
 
-            player = new Player(this, new Point(Canvas.GetLeft(boundaries) + 10, Canvas.GetTop(boundaries) + 70), boundaries, playerBox);
+            player = new Player(this, /*new Point(Canvas.GetLeft(boundaries) + 10, Canvas.GetTop(boundaries) + 70),*/ boundaries, playerBox);
         }
 
         public void Move(Rectangle playerBox, Direction direction, Random random)
@@ -99,7 +99,7 @@ namespace The_Mission
                     Enemies = new List<Enemy>() {
                         new Bat(this, GetRandomLocation(random), batBox),
                     };
-                    WeaponInRoom = new Sword(this, GetRandomLocation(random));
+                    WeaponInRoom = new Sword(this);
                     break;
                 default:
                     break;

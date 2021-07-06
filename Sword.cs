@@ -9,8 +9,8 @@ namespace The_Mission
 {
     class Sword : Weapon
     {
-        public Sword(Game game, Point location)
-            :base(game, location) { }
+        public Sword(Game game)
+            :base(game) { }
 
         public override string Name { get { return "Sword"; } }
         public override void Attack(Direction direction, Random random)
