@@ -15,7 +15,6 @@ namespace The_Mission
     {
         private Rectangle player;
         private Weapon equippedWeapon;
-        private Random random = new Random();
 
         public int HitPoints { get; private set; }
 
@@ -31,8 +30,8 @@ namespace The_Mission
             }
         }
 
-        public Player(Game game, /*Point location,*/ Canvas boundaries, Rectangle playerBox)
-            : base(game/*, location*/)
+        public Player(Game game, Rectangle playerBox)
+            : base(game)
         {
             HitPoints = 10;
 
@@ -46,10 +45,6 @@ namespace The_Mission
             ImageBrush playerTexture = new ImageBrush();
             playerTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/player.png"));
             player.Fill = playerTexture;
-
-            // Sets a player random position
-            Canvas.SetLeft(player, random.Next(10, 434));
-            Canvas.SetTop(player, random.Next(10, 270));
         }
 
         public void Hit(int maxDamage, Random random)

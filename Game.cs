@@ -37,9 +37,19 @@ namespace The_Mission
         {
             this.boundaries = boundaries;
 
-            player = new Player(this, /*new Point(Canvas.GetLeft(boundaries) + 10, Canvas.GetTop(boundaries) + 70),*/ boundaries, playerBox);
+            player = new Player(this, playerBox);
+
+            // Sets a position to spawn the player in the dungeon.
+            //Canvas.SetLeft(playerBox, 0);
+            //Canvas.SetTop(playerBox, boundaries.Height / 2);
         }
 
+        /// <summary>
+        /// Moves the PLAYER to a specific DIRECTION and then moves the enemy in another one RANDOM.
+        /// </summary>
+        /// <param name="playerBox"></param>
+        /// <param name="direction"></param>
+        /// <param name="random"></param>
         public void Move(Rectangle playerBox, Direction direction, Random random)
         {
             player.Move(playerBox, direction);
@@ -79,15 +89,11 @@ namespace The_Mission
             }
         }
 
-        private Point GetRandomLocation(Random random)
+        public void GetRandomLocation(Rectangle character)
         {
-            //return new Point(Canvas.GetLeft(boundaries) +
-            //    random.Next((int)(Canvas.GetRight(boundaries) / 10 - Canvas.GetLeft(boundaries) / 10)) * 10, // X
-            //    (int)(Canvas.GetTop(boundaries) + 
-            //    random.Next((int)(Canvas.GetBottom(boundaries) / 10 - Canvas.GetTop(boundaries) / 10))) * 10);// Y
-
-            return
-            new Point(Canvas.GetLeft(boundaries) + 10, Canvas.GetTop(boundaries) + 70);
+            // Sets a character random position
+            Canvas.SetLeft(character, random.Next(10, 434));
+            Canvas.SetTop(character, random.Next(10, 270));
         }
 
         public void NewLevel(/*Random random*/ Rectangle batBox)
@@ -97,7 +103,7 @@ namespace The_Mission
             {
                 case 1:
                     Enemies = new List<Enemy>() {
-                        new Bat(this, GetRandomLocation(random), batBox),
+                        new Bat(this, batBox),
                     };
                     WeaponInRoom = new Sword(this);
                     break;

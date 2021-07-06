@@ -14,9 +14,8 @@ namespace The_Mission
     class Bat : Enemy
     {
         private Rectangle bat;
-        private Random random = new Random(); 
         
-        public Bat(Game game, Point location, Rectangle batBox)
+        public Bat(Game game, Rectangle batBox)
             : base(game, 6)
         {
             // Creates the bat into stage
@@ -31,8 +30,7 @@ namespace The_Mission
             bat.Fill = playerTexture;
 
             // Sets a bat random position
-            Canvas.SetLeft(bat, random.Next(10, 434));
-            Canvas.SetTop(bat, random.Next(10, 270));
+            // game.GetRandomLocation(bat);            
         }
 
         public override void Move(Random random)
