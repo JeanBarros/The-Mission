@@ -25,9 +25,9 @@ namespace The_Mission
             bat.Height = 50;
             //player.Margin = new Thickness(10);
             //player.StrokeThickness = 2;
-            ImageBrush playerTexture = new ImageBrush();
-            playerTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/bat.png"));
-            bat.Fill = playerTexture;
+            ImageBrush batTexture = new ImageBrush();
+            batTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/bat.png"));
+            bat.Fill = batTexture;
 
             // Sets a bat random position
             // game.GetRandomLocation(bat);            

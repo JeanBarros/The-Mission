@@ -34,7 +34,7 @@ namespace The_Mission
             lblEnemy3.Content = "Zombie: ";
 
             game = new Game(Stage, playerBox);
-            game.NewLevel(batBox);
+            game.NewLevel(batBox, swordBox);
         }
 
         public void UpdateCharacters()

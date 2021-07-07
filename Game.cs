@@ -96,7 +96,7 @@ namespace The_Mission
             Canvas.SetTop(character, random.Next(10, 270));
         }
 
-        public void NewLevel(/*Random random*/ Rectangle batBox)
+        public void NewLevel(Rectangle batBox, Rectangle swordBox)
         {
             level++;
             switch (level)
@@ -105,7 +105,7 @@ namespace The_Mission
                     Enemies = new List<Enemy>() {
                         new Bat(this, batBox),
                     };
-                    WeaponInRoom = new Sword(this);
+                    WeaponInRoom = new Sword(this, swordBox);
                     break;
                 default:
                     break;
