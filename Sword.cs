@@ -12,14 +12,15 @@ namespace The_Mission
 {
     class Sword : Weapon
     {
-        private Rectangle sword;
+        private readonly Rectangle sword;
 
+        public override string Name { get { return "Sword"; } }
         public Sword(Game game, Rectangle swordBox)
             :base(game) 
         {
             // Creates the bat into stage
             sword = swordBox;
-            sword.Tag = "sword";
+            sword.Tag = "Sword";
             sword.Width = 70;
             sword.Height = 52;
             //player.Margin = new Thickness(10);
@@ -29,10 +30,9 @@ namespace The_Mission
             sword.Fill = swordTexture;
 
             // Sets a bat random position
-            game.GetRandomLocation(sword); 
+            game.GetRandomLocation(sword);            
         }
 
-        public override string Name { get { return "Sword"; } }
         public override void Attack(Direction direction, Random random)
         {
             // Your code goes here

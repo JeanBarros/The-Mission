@@ -13,7 +13,7 @@ namespace The_Mission
 {
     class Bat : Enemy
     {
-        private Rectangle bat;
+        private readonly Rectangle bat;
         
         public Bat(Game game, Rectangle batBox)
             : base(game, 6)

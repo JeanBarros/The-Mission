@@ -35,13 +35,13 @@ namespace The_Mission
 
             game = new Game(Stage, playerBox);
             game.NewLevel(batBox, swordBox);
+            UpdateCharacters();
         }
 
         public void UpdateCharacters()
         {
             //Player.Location = game.PlayerLocation;
-            //playerHitPoints.Text =
-            //game.PlayerHitPoints.ToString();
+            //playerHitPoints.Text = game.PlayerHitPoints.ToString();
             //bool showBat = false;
             //bool showGhost = false;
             //bool showGhoul = false;
@@ -60,6 +60,25 @@ namespace The_Mission
             //        }
             //    }
             //}
+
+            swordBox.Visibility = Visibility.Hidden;
+            
+            // Weapons in room
+            Rectangle weaponControl = null;
+
+            switch (game.WeaponInRoom.Name)
+            {
+                case "Sword":
+                    weaponControl = swordBox;
+                    break;
+            }            
+
+            //weaponControl.Visibility = Visibility.Visible;
+
+            if (game.WeaponInRoom.PickedUp)
+                weaponControl.Visibility = Visibility.Hidden;
+            else
+                weaponControl.Visibility = Visibility.Visible;
         }
 
         private void btnMoveUp_Click(object sender, RoutedEventArgs e)

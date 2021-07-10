@@ -21,7 +21,7 @@ namespace The_Mission
         public IEnumerable<Enemy> Enemies { get; private set; }
         public Weapon WeaponInRoom { get; private set; }
 
-        public Point PlayerLocation { get { return player.Location; } }
+        //public Point PlayerLocation { get { return player.Location; } }
         public int PlayerHitPoints { get { return player.HitPoints; } }
         public IEnumerable<string> PlayerWeapons { get { return player.Weapons; } }
         private int level = 0;
@@ -52,7 +52,7 @@ namespace The_Mission
         /// <param name="random"></param>
         public void Move(Rectangle playerBox, Direction direction, Random random)
         {
-            player.Move(playerBox, direction);
+            player.Move(boundaries, playerBox, direction);
 
             foreach (Enemy enemy in Enemies)
             {

@@ -10,9 +10,10 @@ namespace The_Mission
     public abstract class Motion
     {
         private const int MoveInterval = 10;
-        protected Point location;
-        public Point Location { get { return location; } }
+        //protected Point location;
+        //public Point Location { get { return location; } }
         protected Game game;
+        protected Weapon weapon;
 
         public enum Direction
         {
@@ -49,15 +50,14 @@ namespace The_Mission
         /// <param name="direction"></param>
         /// <param name="boundaries"></param>
         /// <returns></returns>
-        public Point Move(Rectangle playerBox, Direction direction, Canvas boundaries)
+        public void Move(Rectangle playerBox, Direction direction, Canvas boundaries)
         {
-            Point newLocation = location;
             switch (direction)
             {
                 case Direction.Up:
                     if (Canvas.GetTop(playerBox) > 10)
                     {
-                        Canvas.SetTop(playerBox, Canvas.GetTop(playerBox) - MoveInterval);
+                        Canvas.SetTop(playerBox, Canvas.GetTop(playerBox) - MoveInterval);                        
                     }
                     break;
                 case Direction.Down:
@@ -85,7 +85,6 @@ namespace The_Mission
                     break;
                 default: break;
             }
-            return newLocation;
         }
     }
 }

@@ -66,13 +66,29 @@ namespace The_Mission
             }
         }
 
-        public void Move(Rectangle playerBox, Direction direction)
+        public void Move(Canvas stage, Rectangle playerBox, Direction direction)
         {
-            base.location = Move(playerBox, direction, game.Boundaries);
-            //if (!game.WeaponInRoom.PickedUp)
-            //{
-            //    // see if the weapon is nearby, and possibly pick it up
-            //}
+            Move(playerBox, direction, game.Boundaries);
+            if (!game.WeaponInRoom.PickedUp)
+            {
+                // HitBox creates a box outside of the objects (bounds) which will be used to detect collision between two objects
+                // Divides width and height of the player by two only to make sure that he will pick up the weapon when closest of it.
+                Rect playerHitBox = new Rect(Canvas.GetLeft(playerBox), Canvas.GetTop(playerBox), (playerBox.Width / 2), (playerBox.Height / 2));
+
+                foreach (var item in stage.Children.OfType<Rectangle>())
+                {
+                    if ((string)item.Tag == "Sword")
+                    {
+                        Rect weaponHitBox = new Rect(Canvas.GetLeft(item), Canvas.GetTop(item), item.Width, item.Height);
+                        if (playerHitBox.IntersectsWith(weaponHitBox))
+                        {
+                            MessageBox.Show("Weapon Picked");
+                            game.WeaponInRoom.PickUpWeapon();
+                            inventory.Add(game.WeaponInRoom);
+                        }
+                    }
+                }
+            }
         }
 
         public void Attack(Direction direction, Random random)

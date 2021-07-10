@@ -34,11 +34,11 @@ namespace The_Mission
             {
                 foreach (Enemy enemy in game.Enemies)
                 {
-                    if (Nearby(enemy.Location, distance))
-                    {
-                        enemy.Hit(damage, random);
-                        return true;
-                    }
+                    //if (Nearby(enemy.Location, distance))
+                    //{
+                    //    enemy.Hit(damage, random);
+                    //    return true;
+                    //}
                 }
                 //target = Move(direction, game.Boundaries);
             }
