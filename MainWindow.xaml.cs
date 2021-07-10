@@ -61,9 +61,7 @@ namespace The_Mission
             //    }
             //}
 
-            swordBox.Visibility = Visibility.Hidden;
-            
-            // Weapons in room
+            // Weapons in Room
             Rectangle weaponControl = null;
 
             switch (game.WeaponInRoom.Name)
