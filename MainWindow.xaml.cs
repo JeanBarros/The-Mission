@@ -28,38 +28,54 @@ namespace The_Mission
 
             int score = 0;
 
-            lblPlayer.Content = "Player: " + score;
-            lblEnemy1.Content = "Bat: ";
+            playerHitPoints.Content = "Player: " + score;
+            batHitPoints.Content = "Bat: ";
             lblEnemy2.Content = "Ghost: ";
             lblEnemy3.Content = "Zombie: ";
 
-            game = new Game(Stage, playerBox);
+            game = new Game(Stage, playerBox, swordIcon);
             game.NewLevel(batBox, swordBox);
             UpdateCharacters();
         }
 
         public void UpdateCharacters()
         {
-            //Player.Location = game.PlayerLocation;
-            //playerHitPoints.Text = game.PlayerHitPoints.ToString();
-            //bool showBat = false;
-            //bool showGhost = false;
-            //bool showGhoul = false;
-            //int enemiesShown = 0;
+            playerHitPoints.Content = game.PlayerHitPoints.ToString();
+            bool showBat = false;
+            bool showGhost = false;
+            bool showGhoul = false;
+            int enemiesShown = 0;
 
-            //foreach (Enemy enemy in game.Enemies)
-            //{
-            //    if (enemy is Bat)
-            //    {
-            //        bat.Location = enemy.Location;
-            //        batHitPoints.Text = enemy.HitPoints.ToString();
-            //        if (enemy.HitPoints > 0)
-            //        {
-            //            showBat = true;
-            //            enemiesShown++;
-            //        }
-            //    }
-            //}
+            foreach (Enemy enemy in game.Enemies)
+            {
+                if (enemy is Bat)
+                {
+                    batHitPoints.Content = $"Bat: {enemy.HitPoints.ToString()}";
+                    if (enemy.HitPoints > 0)
+                    {
+                        showBat = true;
+                        enemiesShown++;
+                    }
+                    else
+                    {
+                        showBat = false;
+                        batBox.Visibility = Visibility.Hidden;
+                    }
+                }
+            }
+
+            // If the weapon is the only one that the player has, equip it immediately.
+            if (game.PlayerWeapons.Count() == 1)
+            {
+                game.Equip(game.PlayerWeapons.First());
+            }
+
+            if (game.CheckPlayerInventory("Sword"))
+            {
+                game.Equip("Sword");
+                //inventoryBow.BorderStyle = BorderStyle.FixedSingle;
+                //inventorySword.BorderStyle = BorderStyle.None;
+            }
 
             // Weapons in Room
             Rectangle weaponControl = null;
@@ -74,11 +90,16 @@ namespace The_Mission
             //weaponControl.Visibility = Visibility.Visible;
 
             if (game.WeaponInRoom.PickedUp)
+            {
                 weaponControl.Visibility = Visibility.Hidden;
+                swordIcon.Visibility = Visibility.Visible;
+                game.Equip(weaponControl.Name);
+            }
             else
                 weaponControl.Visibility = Visibility.Visible;
         }
 
+        #region Moves
         private void btnMoveUp_Click(object sender, RoutedEventArgs e)
         {
             game.Move(playerBox, Motion.Direction.Up, random);
@@ -102,5 +123,15 @@ namespace The_Mission
             game.Move(playerBox, Motion.Direction.Left, random);
             UpdateCharacters();
         }
+        #endregion
+
+        #region Attack
+        private void btnAttackUp_Click(object sender, RoutedEventArgs e)
+        {
+            game.Attack(Stage, playerBox, Motion.Direction.Up, random);
+            UpdateCharacters();
+        }
+
+        #endregion
     }
 }

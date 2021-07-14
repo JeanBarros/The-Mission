@@ -29,18 +29,28 @@ namespace The_Mission
             //this.location = location;
         }
 
-        public bool Nearby(Point locationToCheck, int distance)
+        public bool Nearby(Canvas stage, Rectangle playerBox, int distance)
         {
-            //if (Math.Abs(location.X - locationToCheck.X) < distance &&
-            //(Math.Abs(location.Y - locationToCheck.Y) < distance))
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-            return true;
+            // HitBox creates a box outside of the objects (bounds) which will be used to detect collision between two objects
+            // Sword hit box needs to collide with Bat hit box using IntersectsWith method, which means the Bat is within sword range (radius).
+            
+            Rect playerHitBox = new Rect(Canvas.GetLeft(playerBox), Canvas.GetTop(playerBox), (playerBox.Width), (playerBox.Height));
+
+            foreach (var item in stage.Children.OfType<Rectangle>())
+            {
+                if ((string)item.Tag == "Bat")
+                {
+                    Rect batHitBox = new Rect(Canvas.GetLeft(item), Canvas.GetTop(item), item.Width, item.Height);
+                    if (playerHitBox.IntersectsWith(batHitBox))
+                    {
+                        MessageBox.Show("Bat says: Ouch!");
+                        return true;
+                    }
+                    
+                }
+            }
+            
+            return false;
         }
 
         /// <summary>

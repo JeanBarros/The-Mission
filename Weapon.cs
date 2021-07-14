@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace The_Mission
 {
@@ -24,9 +26,9 @@ namespace The_Mission
 
         public abstract string Name { get; }
 
-        public abstract void Attack(Direction direction, Random random);
+        public abstract void Attack(Canvas stage, Rectangle playerBox, Direction direction, Random random, string weaponName);
 
-        protected bool DamageEnemy(Direction direction, int radius, int damage, Random random)
+        protected bool DamageEnemy(Canvas stage, Rectangle playerBox, Direction direction, int radius, int damage, Random random)
         {
             //Point target = game.PlayerLocation;
 
@@ -34,12 +36,15 @@ namespace The_Mission
             {
                 foreach (Enemy enemy in game.Enemies)
                 {
-                    //if (Nearby(enemy.Location, distance))
-                    //{
-                    //    enemy.Hit(damage, random);
-                    //    return true;
-                    //}
+                    if (Nearby(stage, playerBox, distance))
+                    {
+                        enemy.Hit(damage, random);
+                        return true;
+                    }
+
+                    //MessageBox.Show(enemy.Name);
                 }
+                
                 //target = Move(direction, game.Boundaries);
             }
             return false;

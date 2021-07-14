@@ -82,18 +82,24 @@ namespace The_Mission
                         Rect weaponHitBox = new Rect(Canvas.GetLeft(item), Canvas.GetTop(item), item.Width, item.Height);
                         if (playerHitBox.IntersectsWith(weaponHitBox))
                         {
-                            MessageBox.Show("Weapon Picked");
+                            //MessageBox.Show("Weapon Picked");
                             game.WeaponInRoom.PickUpWeapon();
-                            inventory.Add(game.WeaponInRoom);
+                            inventory.Add(game.WeaponInRoom);                            
                         }
                     }
                 }
             }
         }
 
-        public void Attack(Direction direction, Random random)
+        public void Attack(Canvas stage, Rectangle playerBox, Direction direction, Random random)
         {
-
+            foreach (Weapon weapon in inventory)
+            {
+                if (equippedWeapon.Name == "Sword") 
+                {
+                    equippedWeapon.Attack(stage, playerBox, direction, random, equippedWeapon.Name);
+                }
+            }
         }
     }
 }

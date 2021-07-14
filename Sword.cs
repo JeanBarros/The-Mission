@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -33,9 +34,10 @@ namespace The_Mission
             game.GetRandomLocation(sword);            
         }
 
-        public override void Attack(Direction direction, Random random)
+        public override void Attack(Canvas stage, Rectangle playerBox, Direction direction, Random random, string weaponName)
         {
-            // Your code goes here
+            //MessageBox.Show($"Attack in {direction} direction using a {weaponName}!");
+            DamageEnemy(stage, playerBox, direction, 10, 3, random);
         }
     }
 }

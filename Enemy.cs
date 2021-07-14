@@ -22,6 +22,8 @@ namespace The_Mission
             }
         }
 
+        public abstract string Name { get; }
+
         public Enemy(Game game, int hitPoints)
         : base(game) 
         { 

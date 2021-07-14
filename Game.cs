@@ -33,7 +33,7 @@ namespace The_Mission
             get { return boundaries; }
         }
 
-        public Game(Canvas boundaries, Rectangle playerBox)
+        public Game(Canvas boundaries, Rectangle playerBox, Rectangle swordIcon)
         {
             this.boundaries = boundaries;
 
@@ -80,9 +80,9 @@ namespace The_Mission
             player.IncreaseHealth(health, random);
         }
 
-        public void Attack(Direction direction, Random random)
+        public void Attack(Canvas stage, Rectangle playerBox, Direction direction, Random random)
         {
-            player.Attack(direction, random);
+            player.Attack(stage, playerBox, direction, random);
             foreach (Enemy enemy in Enemies)
             {
                 enemy.Move(random);

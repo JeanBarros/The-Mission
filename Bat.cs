@@ -14,13 +14,15 @@ namespace The_Mission
     class Bat : Enemy
     {
         private readonly Rectangle bat;
-        
+
+        public override string Name { get { return "Bat"; } }
+
         public Bat(Game game, Rectangle batBox)
             : base(game, 6)
         {
             // Creates the bat into stage
             bat = batBox;
-            bat.Tag = "bat";
+            bat.Tag = "Bat";
             bat.Width = 50;
             bat.Height = 50;
             //player.Margin = new Thickness(10);
