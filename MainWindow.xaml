@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:The_Mission"
         mc:Ignorable="d"
-        Title="The Mission" Height="650" ResizeMode="NoResize" Width="940">
+        Title="The Mission" Height="650" ResizeMode="NoResize" Width="940" Focusable="True" KeyUp="KeyIsUp">
 
-    <Canvas Focusable="True">
+    <Canvas>
         <Canvas.Background>
             <ImageBrush ImageSource="dungeon01.jpg"/>
         </Canvas.Background>
@@ -78,7 +78,7 @@
                             <Image Source="Assets/Images/ghost.png" Width="80"/>
                             <Image Source="Assets/Images/zombie.png" Width="70"/>
                             <Rectangle Name="playerBox" Width="80" Height="103" Fill="Yellow" Canvas.Left="10" Canvas.Top="245" />
-                            <Rectangle Name="batBox" Width="50" Height="50" Fill="#FF47422E" Canvas.Left="373" Canvas.Top="0" Stroke="Red"/>
+                            <Rectangle Name="batBox" Width="50" Height="50" Fill="#FF47422E" Canvas.Left="373" Canvas.Top="0" />
                             <Rectangle Name="swordBox" Width="70" Height="52" Fill="#FFC35ABE" />
                         </Canvas>
                     </Border>

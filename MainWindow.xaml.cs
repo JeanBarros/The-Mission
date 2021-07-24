@@ -61,6 +61,12 @@ namespace The_Mission
                 }
             }
 
+            if (game.PlayerHitPoints <= 0)
+            {
+                Stage.Children.Remove(playerBox);
+                playerHitPoints.Content = $"Player is dead!";
+            }
+
             // If the weapon is the only one that the player has, equip it immediately.
             if (game.PlayerWeapons.Count() == 1)
             {
@@ -130,5 +136,29 @@ namespace The_Mission
         }
 
         #endregion
+
+        private void KeyIsUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up)
+            {
+                game.Move(playerBox, batBox, Motion.Direction.Up, random);
+                UpdateCharacters();
+            }
+            if (e.Key == Key.Down)
+            {
+                game.Move(playerBox, batBox, Motion.Direction.Down, random);
+                UpdateCharacters();
+            }
+            if (e.Key == Key.Left)
+            {
+                game.Move(playerBox, batBox, Motion.Direction.Left, random);
+                UpdateCharacters();
+            }
+            if (e.Key == Key.Right)
+            {
+                game.Move(playerBox, batBox, Motion.Direction.Right, random);
+                UpdateCharacters();
+            }
+        }
     }
 }
