@@ -35,11 +35,16 @@ namespace The_Mission
             // game.GetRandomLocation(bat);            
         }
 
-        public override void Move(Random random)
+        public override void Move(Canvas stage, Rectangle playerBox, Rectangle batBox, Random random)
         {
             // Sets a bat random position
             Canvas.SetLeft(bat, random.Next(10, 434));
             Canvas.SetTop(bat, random.Next(10, 270));
+
+            if (NearPlayer(stage, playerBox, batBox))
+            {
+                game.HitPlayer(2, random);
+            }            
         }
     }
 }

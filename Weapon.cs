@@ -26,17 +26,15 @@ namespace The_Mission
 
         public abstract string Name { get; }
 
-        public abstract void Attack(Canvas stage, Rectangle playerBox, Direction direction, Random random, string weaponName);
+        public abstract void Attack(Canvas stage, Rectangle playerBox, Rectangle batBox, Direction direction, Random random, string weaponName);
 
-        protected bool DamageEnemy(Canvas stage, Rectangle playerBox, Direction direction, int radius, int damage, Random random)
+        protected bool DamageEnemy(Canvas stage, Rectangle playerBox, Rectangle batBox, Direction direction, int radius, int damage, Random random)
         {
-            //Point target = game.PlayerLocation;
-
             for (int distance = 0; distance < radius; distance++)
             {
                 foreach (Enemy enemy in game.Enemies)
                 {
-                    if (Nearby(stage, playerBox, distance))
+                    if (Nearby(stage, playerBox, batBox, distance, true))
                     {
                         enemy.Hit(damage, random);
                         return true;
@@ -44,8 +42,6 @@ namespace The_Mission
 
                     //MessageBox.Show(enemy.Name);
                 }
-                
-                //target = Move(direction, game.Boundaries);
             }
             return false;
         }

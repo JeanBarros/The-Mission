@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace The_Mission
 {
@@ -17,8 +18,10 @@ namespace The_Mission
         {
             get
             {
-                if (HitPoints <= 0) return true;
-                else return false;
+                if (HitPoints <= 0) 
+                    return true;
+                else 
+                    return false;
             }
         }
 
@@ -30,17 +33,17 @@ namespace The_Mission
             HitPoints = hitPoints; 
         }
 
-        public abstract void Move(Random random);
+        public abstract void Move(Canvas stage, Rectangle playerBox, Rectangle batBox, Random random);
 
         public void Hit(int maxDamage, Random random)
         {
             HitPoints -= random.Next(1, maxDamage);
         }
 
-        //protected bool NearPlayer()
-        //{
-        //    return (Nearby(game.PlayerLocation, NearPlayerDistance));
-        //}
+        protected bool NearPlayer(Canvas stage, Rectangle playerBox, Rectangle batBox)
+        {
+            return Nearby(stage, playerBox, batBox, NearPlayerDistance, false);
+        }
 
         //protected Direction FindPlayerDirection(Point playerLocation)
         //{

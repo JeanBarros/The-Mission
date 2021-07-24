@@ -37,7 +37,7 @@ namespace The_Mission
 
             // Creates the player into stage
             player = playerBox;
-            player.Tag = "player";
+            player.Tag = "Player";
             player.Width = 80;
             player.Height = 103;
             //player.Margin = new Thickness(10);
@@ -47,6 +47,11 @@ namespace The_Mission
             player.Fill = playerTexture;
         }
 
+        /// <summary>
+        /// When an enemy hits the player, it causes a random amount of damage up to a maximum defined value.
+        /// </summary>
+        /// <param name="maxDamage"></param>
+        /// <param name="random"></param>
         public void Hit(int maxDamage, Random random)
         {
             HitPoints -= random.Next(1, maxDamage);
@@ -62,7 +67,9 @@ namespace The_Mission
             foreach (Weapon weapon in inventory)
             {
                 if (weapon.Name == weaponName)
+                {
                     equippedWeapon = weapon;
+                }
             }
         }
 
@@ -91,13 +98,13 @@ namespace The_Mission
             }
         }
 
-        public void Attack(Canvas stage, Rectangle playerBox, Direction direction, Random random)
+        public void Attack(Canvas stage, Rectangle playerBox, Rectangle batBox, Direction direction, Random random)
         {
             foreach (Weapon weapon in inventory)
             {
                 if (equippedWeapon.Name == "Sword") 
                 {
-                    equippedWeapon.Attack(stage, playerBox, direction, random, equippedWeapon.Name);
+                    equippedWeapon.Attack(stage, playerBox, batBox, direction, random, equippedWeapon.Name);
                 }
             }
         }

@@ -34,10 +34,10 @@ namespace The_Mission
             game.GetRandomLocation(sword);            
         }
 
-        public override void Attack(Canvas stage, Rectangle playerBox, Direction direction, Random random, string weaponName)
+        public override void Attack(Canvas stage, Rectangle playerBox, Rectangle batBox, Direction direction, Random random, string weaponName)
         {
             //MessageBox.Show($"Attack in {direction} direction using a {weaponName}!");
-            DamageEnemy(stage, playerBox, direction, 10, 3, random);
+            DamageEnemy(stage, playerBox, batBox, direction, 10, 3, random);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,13 +27,6 @@ namespace The_Mission
         {
             InitializeComponent();
 
-            int score = 0;
-
-            playerHitPoints.Content = "Player: " + score;
-            batHitPoints.Content = "Bat: ";
-            lblEnemy2.Content = "Ghost: ";
-            lblEnemy3.Content = "Zombie: ";
-
             game = new Game(Stage, playerBox, swordIcon);
             game.NewLevel(batBox, swordBox);
             UpdateCharacters();
@@ -40,7 +34,7 @@ namespace The_Mission
 
         public void UpdateCharacters()
         {
-            playerHitPoints.Content = game.PlayerHitPoints.ToString();
+            playerHitPoints.Content = $"Player: {game.PlayerHitPoints.ToString()}";
             bool showBat = false;
             bool showGhost = false;
             bool showGhoul = false;
@@ -51,15 +45,18 @@ namespace The_Mission
                 if (enemy is Bat)
                 {
                     batHitPoints.Content = $"Bat: {enemy.HitPoints.ToString()}";
-                    if (enemy.HitPoints > 0)
+                    if (enemy.Dead)
                     {
-                        showBat = true;
-                        enemiesShown++;
+                        showBat = false;
+                        //MessageBox.Show($"{enemy.Name} died!");
+                        //batBox.Visibility = Visibility.Hidden;
+                        Stage.Children.Remove(batBox);
+                        batHitPoints.Content = $"Bat is dead!";
                     }
                     else
                     {
-                        showBat = false;
-                        batBox.Visibility = Visibility.Hidden;
+                        showBat = true;
+                        enemiesShown++;
                     }
                 }
             }
@@ -73,8 +70,8 @@ namespace The_Mission
             if (game.CheckPlayerInventory("Sword"))
             {
                 game.Equip("Sword");
-                //inventoryBow.BorderStyle = BorderStyle.FixedSingle;
-                //inventorySword.BorderStyle = BorderStyle.None;
+                swordIcon.StrokeThickness = 2;
+                swordIcon.Stroke = Brushes.White;
             }
 
             // Weapons in Room
@@ -102,25 +99,25 @@ namespace The_Mission
         #region Moves
         private void btnMoveUp_Click(object sender, RoutedEventArgs e)
         {
-            game.Move(playerBox, Motion.Direction.Up, random);
+            game.Move(playerBox, batBox, Motion.Direction.Up, random);
             UpdateCharacters();
         }
 
         private void btnMoveRight_Click(object sender, RoutedEventArgs e)
         {
-            game.Move(playerBox, Motion.Direction.Right, random);
+            game.Move(playerBox, batBox, Motion.Direction.Right, random);
             UpdateCharacters();
         }
 
         private void btnMoveDown_Click(object sender, RoutedEventArgs e)
         {
-            game.Move(playerBox, Motion.Direction.Down, random);
+            game.Move(playerBox, batBox, Motion.Direction.Down, random);
             UpdateCharacters();
         }
 
         private void btnMoveLeft_Click(object sender, RoutedEventArgs e)
         {
-            game.Move(playerBox, Motion.Direction.Left, random);
+            game.Move(playerBox, batBox, Motion.Direction.Left, random);
             UpdateCharacters();
         }
         #endregion
@@ -128,7 +125,7 @@ namespace The_Mission
         #region Attack
         private void btnAttackUp_Click(object sender, RoutedEventArgs e)
         {
-            game.Attack(Stage, playerBox, Motion.Direction.Up, random);
+            game.Attack(Stage, playerBox, batBox, Motion.Direction.Up, random);
             UpdateCharacters();
         }
 

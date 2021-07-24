@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace The_Mission
 {
@@ -29,29 +30,62 @@ namespace The_Mission
             //this.location = location;
         }
 
-        public bool Nearby(Canvas stage, Rectangle playerBox, int distance)
+        /// <summary>
+        /// Checks if a enemy is within weapon range (radius). If they’re within distance of each other, then it returns true; otherwise, it returns false.
+        /// </summary>
+        /// <param name="stage"></param>
+        /// <param name="playerBox"></param>
+        /// <param name="distance"></param>
+        /// /// <param name="isPlayerAttacking"></param>
+        /// <returns></returns>
+        public bool Nearby(Canvas stage, Rectangle playerBox, Rectangle batBox, int distance, bool isPlayerAttacking)
         {
             // HitBox creates a box outside of the objects (bounds) which will be used to detect collision between two objects
             // Sword hit box needs to collide with Bat hit box using IntersectsWith method, which means the Bat is within sword range (radius).
             
             Rect playerHitBox = new Rect(Canvas.GetLeft(playerBox), Canvas.GetTop(playerBox), (playerBox.Width), (playerBox.Height));
+            Rect batHitBox;
 
             foreach (var item in stage.Children.OfType<Rectangle>())
             {
-                if ((string)item.Tag == "Bat")
+                // Checks if the move is player's attack or an enemy's attack.
+                if (isPlayerAttacking)
                 {
-                    Rect batHitBox = new Rect(Canvas.GetLeft(item), Canvas.GetTop(item), item.Width, item.Height);
-                    if (playerHitBox.IntersectsWith(batHitBox))
+                    if ((string)item.Tag == "Bat")
                     {
-                        MessageBox.Show("Bat says: Ouch!");
-                        return true;
+                        if (stage.Children.Contains(playerBox))
+                        {
+                            batHitBox = new Rect(Canvas.GetLeft(item), Canvas.GetTop(item), item.Width, item.Height);
+                            if (playerHitBox.IntersectsWith(batHitBox))
+                            {
+                                MessageBox.Show($"{item.Tag} says: Ouch!");
+
+                                return true;
+                            }
+                        }
                     }
-                    
+                }
+                else
+                {
+                    if ((string)item.Tag == "Player") 
+                    {
+                        if (stage.Children.Contains(batBox))
+                        {
+                            playerHitBox = new Rect(Canvas.GetLeft(playerBox), Canvas.GetTop(playerBox), (playerBox.Width), (playerBox.Height));
+                            batHitBox = new Rect(Canvas.GetLeft(batBox), Canvas.GetTop(batBox), batBox.Width, batBox.Height);
+
+                            if (batHitBox.IntersectsWith(playerHitBox))
+                            {
+                                MessageBox.Show($"{item.Tag} says: Ouch!");
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
             
             return false;
-        }
+        }        
 
         /// <summary>
         /// Moves the PLAYER to a DIRECTION within the LIMITS of the dungeon. 

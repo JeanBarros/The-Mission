@@ -31,7 +31,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <Rectangle Name="swordIcon" Margin="52,9,53,10" Stroke="White" StrokeThickness="2" Visibility="Hidden">
+                    <Rectangle Name="swordIcon" Margin="52,9,53,10" Visibility="Hidden">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="Assets/Images/sword.png" Stretch="Uniform"/>
                         </Rectangle.Fill>
@@ -64,8 +64,8 @@
                         <StackPanel>
                             <Label Name="playerHitPoints" FontWeight="Bold" FontSize="20" Foreground="#ffffff"/>
                             <Label Name="batHitPoints" FontWeight="Bold" FontSize="20" Foreground="#ffffff"/>
-                            <Label Name="lblEnemy2" FontWeight="Bold" FontSize="20" Foreground="#ffffff"/>
-                            <Label Name="lblEnemy3" FontWeight="Bold" FontSize="20" Foreground="#ffffff"/>
+                            <Label Name="ghostHitPoints" FontWeight="Bold" FontSize="20" Foreground="#ffffff"/>
+                            <Label Name="zombieHitPoints" FontWeight="Bold" FontSize="20" Foreground="#ffffff"/>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -78,7 +78,7 @@
                             <Image Source="Assets/Images/ghost.png" Width="80"/>
                             <Image Source="Assets/Images/zombie.png" Width="70"/>
                             <Rectangle Name="playerBox" Width="80" Height="103" Fill="Yellow" Canvas.Left="10" Canvas.Top="245" />
-                            <Rectangle Name="batBox" Width="50" Height="50" Fill="#FF47422E" Canvas.Left="373"/>
+                            <Rectangle Name="batBox" Width="50" Height="50" Fill="#FF47422E" Canvas.Left="373" Canvas.Top="0" Stroke="Red"/>
                             <Rectangle Name="swordBox" Width="70" Height="52" Fill="#FFC35ABE" />
                         </Canvas>
                     </Border>

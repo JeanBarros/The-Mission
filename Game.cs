@@ -18,7 +18,7 @@ namespace The_Mission
         private Player player;
         private Random random = new Random();
 
-        public IEnumerable<Enemy> Enemies { get; private set; }
+        public List<Enemy> Enemies { get; private set; }
         public Weapon WeaponInRoom { get; private set; }
 
         //public Point PlayerLocation { get { return player.Location; } }
@@ -39,7 +39,7 @@ namespace The_Mission
 
             player = new Player(this, playerBox);
 
-            // Sets a position to spawn the player in the dungeon.
+            // Sets a position to spawn the player in the dungeon. For now it is setted up on XAML file.
             //Canvas.SetLeft(playerBox, 0);
             //Canvas.SetTop(playerBox, boundaries.Height / 2);
         }
@@ -50,13 +50,13 @@ namespace The_Mission
         /// <param name="playerBox"></param>
         /// <param name="direction"></param>
         /// <param name="random"></param>
-        public void Move(Rectangle playerBox, Direction direction, Random random)
+        public void Move(Rectangle playerBox, Rectangle batBox, Direction direction, Random random)
         {
             player.Move(boundaries, playerBox, direction);
 
             foreach (Enemy enemy in Enemies)
             {
-                enemy.Move(random);
+                enemy.Move(boundaries, playerBox, batBox, random);
             }
         }
 
@@ -70,6 +70,11 @@ namespace The_Mission
             return player.Weapons.Contains(weaponName);
         }
 
+        /// <summary>
+        /// When an enemy hits the player, it causes a random amount of damage up to a maximum defined value.
+        /// </summary>
+        /// <param name="maxDamage"></param>
+        /// <param name="random"></param>
         public void HitPlayer(int maxDamage, Random random)
         {
             player.Hit(maxDamage, random);
@@ -80,12 +85,12 @@ namespace The_Mission
             player.IncreaseHealth(health, random);
         }
 
-        public void Attack(Canvas stage, Rectangle playerBox, Direction direction, Random random)
+        public void Attack(Canvas stage, Rectangle playerBox, Rectangle batBox, Direction direction, Random random)
         {
-            player.Attack(stage, playerBox, direction, random);
+            player.Attack(stage, playerBox, batBox, direction, random);
             foreach (Enemy enemy in Enemies)
             {
-                enemy.Move(random);
+                enemy.Move(stage, playerBox, batBox, random);
             }
         }
 
