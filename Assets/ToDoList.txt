@@ -6,3 +6,4 @@ The game must to have:
 -Background animation simulating fog;
 -Hit points as icons instead of text;
 -Sprites for characters animations;
+-Button for reset game;

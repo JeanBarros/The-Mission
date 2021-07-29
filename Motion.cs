@@ -11,8 +11,8 @@ namespace The_Mission
     public abstract class Motion
     {
         private const int MoveInterval = 10;
-        //protected Point location;
-        //public Point Location { get { return location; } }
+        protected Point location;
+        public Point Location { get { return location; } }
         protected Game game;
         protected Weapon weapon;
 
@@ -24,10 +24,10 @@ namespace The_Mission
             Right
         }
 
-        public Motion(Game game/*, Point location*/)
+        public Motion(Game game, Point location)
         {
             this.game = game;
-            //this.location = location;
+            this.location = location;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace The_Mission
             // HitBox creates a box outside of the objects (bounds) which will be used to detect collision between two objects
             // Sword hit box needs to collide with Bat hit box using IntersectsWith method, which means the Bat is within sword range (radius).
             
-            Rect playerHitBox = new Rect(Canvas.GetLeft(playerBox), Canvas.GetTop(playerBox), (playerBox.Width), (playerBox.Height));
+            Rect playerHitBox = new Rect(Canvas.GetLeft(playerBox), Canvas.GetTop(playerBox), (playerBox.Width), playerBox.Height);
             Rect batHitBox;
 
             foreach (var item in stage.Children.OfType<Rectangle>())
@@ -67,7 +67,7 @@ namespace The_Mission
                 }
                 else
                 {
-                    if ((string)item.Tag == "Player") 
+                    if ((string)item.Tag == "Player")
                     {
                         if (stage.Children.Contains(batBox))
                         {
@@ -85,50 +85,54 @@ namespace The_Mission
             }
             
             return false;
-        }        
+        }
 
         /// <summary>
-        /// Moves the PLAYER to a DIRECTION within the LIMITS of the dungeon. 
+        /// Moves the CHARACTERS to a DIRECTION within the LIMITS of the dungeon. 
         /// </summary>
-        /// <param name="playerBox"></param>
+        /// <param name="character"></param>
         /// <param name="direction"></param>
         /// <param name="boundaries"></param>
         /// <returns></returns>
-        public void Move(Rectangle playerBox, Direction direction, Canvas boundaries)
+        public Point Move(Rectangle character, Direction direction, Canvas boundaries)
         {
+            Point newLocation = location;
+
             switch (direction)
             {
                 case Direction.Up:
-                    if (Canvas.GetTop(playerBox) > 10)
+                    if (Canvas.GetTop(character) > 10)
                     {
-                        Canvas.SetTop(playerBox, Canvas.GetTop(playerBox) - MoveInterval);                        
+                        Canvas.SetTop(character, newLocation.Y -= MoveInterval);
                     }
                     break;
                 case Direction.Down:
-                    if ((Canvas.GetTop(playerBox) + (playerBox.Height)) < (boundaries.ActualHeight - MoveInterval))
+                    if ((Canvas.GetTop(character) + character.Height) < (boundaries.ActualHeight - MoveInterval))
                     {
-                        Canvas.SetTop(playerBox, Canvas.GetTop(playerBox) + MoveInterval);
+                        Canvas.SetTop(character, newLocation.Y += MoveInterval);
                     }
                     break;
                 case Direction.Left:
-                    if (Canvas.GetLeft(playerBox) > 0)
+                    if (Canvas.GetLeft(character) > 0)
                     {
-                        Canvas.SetLeft(playerBox, Canvas.GetLeft(playerBox) - MoveInterval);
+                        Canvas.SetLeft(character, newLocation.X -= MoveInterval);
 
-                        if (Canvas.GetLeft(playerBox) < 0)
+                        if (Canvas.GetLeft(character) < 0)
                         {
-                            Canvas.SetLeft(playerBox, Canvas.GetLeft(playerBox) + MoveInterval);
+                            Canvas.SetLeft(character, newLocation.X + MoveInterval);
                         }
                     }
                     break;
                 case Direction.Right:
-                    if ((Canvas.GetLeft(playerBox) + (playerBox.Width)) < (boundaries.ActualWidth - MoveInterval))
+                    if ((Canvas.GetLeft(character) + character.Width) < (boundaries.ActualWidth - MoveInterval))
                     {
-                        Canvas.SetLeft(playerBox, Canvas.GetLeft(playerBox) + MoveInterval);
+                        Canvas.SetLeft(character, newLocation.X += MoveInterval);
                     }
+
                     break;
                 default: break;
             }
+            return newLocation;
         }
     }
 }

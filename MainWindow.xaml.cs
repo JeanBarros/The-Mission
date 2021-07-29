@@ -23,17 +23,21 @@ namespace The_Mission
     {
         private Game game;
         private Random random = new Random();
+        Point playerLocation;
+
         public MainWindow()
         {
             InitializeComponent();
 
             game = new Game(Stage, playerBox, swordIcon);
-            game.NewLevel(batBox, swordBox);
+            game.NewLevel(batBox, swordBox, random);
             UpdateCharacters();
         }
 
         public void UpdateCharacters()
         {
+            playerLocation = game.PlayerLocation;
+            
             playerHitPoints.Content = $"Player: {game.PlayerHitPoints.ToString()}";
             bool showBat = false;
             bool showGhost = false;
@@ -105,25 +109,25 @@ namespace The_Mission
         #region Moves
         private void btnMoveUp_Click(object sender, RoutedEventArgs e)
         {
-            game.Move(playerBox, batBox, Motion.Direction.Up, random);
+            game.Move(playerBox, batBox, Motion.Direction.Up, random, playerLocation);
             UpdateCharacters();
         }
 
         private void btnMoveRight_Click(object sender, RoutedEventArgs e)
         {
-            game.Move(playerBox, batBox, Motion.Direction.Right, random);
+            game.Move(playerBox, batBox, Motion.Direction.Right, random, playerLocation);
             UpdateCharacters();
         }
 
         private void btnMoveDown_Click(object sender, RoutedEventArgs e)
         {
-            game.Move(playerBox, batBox, Motion.Direction.Down, random);
+            game.Move(playerBox, batBox, Motion.Direction.Down, random, playerLocation);
             UpdateCharacters();
         }
 
         private void btnMoveLeft_Click(object sender, RoutedEventArgs e)
         {
-            game.Move(playerBox, batBox, Motion.Direction.Left, random);
+            game.Move(playerBox, batBox, Motion.Direction.Left, random, playerLocation);
             UpdateCharacters();
         }
         #endregion
@@ -131,7 +135,7 @@ namespace The_Mission
         #region Attack
         private void btnAttackUp_Click(object sender, RoutedEventArgs e)
         {
-            game.Attack(Stage, playerBox, batBox, Motion.Direction.Up, random);
+            game.Attack(Stage, playerBox, batBox, Motion.Direction.Up, random, playerLocation);
             UpdateCharacters();
         }
 
@@ -141,22 +145,22 @@ namespace The_Mission
         {
             if (e.Key == Key.Up)
             {
-                game.Move(playerBox, batBox, Motion.Direction.Up, random);
+                game.Move(playerBox, batBox, Motion.Direction.Up, random, playerLocation);
                 UpdateCharacters();
             }
             if (e.Key == Key.Down)
             {
-                game.Move(playerBox, batBox, Motion.Direction.Down, random);
+                game.Move(playerBox, batBox, Motion.Direction.Down, random, playerLocation);
                 UpdateCharacters();
             }
             if (e.Key == Key.Left)
             {
-                game.Move(playerBox, batBox, Motion.Direction.Left, random);
+                game.Move(playerBox, batBox, Motion.Direction.Left, random, playerLocation);
                 UpdateCharacters();
             }
             if (e.Key == Key.Right)
             {
-                game.Move(playerBox, batBox, Motion.Direction.Right, random);
+                game.Move(playerBox, batBox, Motion.Direction.Right, random, playerLocation);
                 UpdateCharacters();
             }
         }

@@ -27,13 +27,13 @@ namespace The_Mission
 
         public abstract string Name { get; }
 
-        public Enemy(Game game, int hitPoints)
-        : base(game) 
-        { 
-            HitPoints = hitPoints; 
+        public Enemy(Game game, int hitPoints, Point location)
+        : base(game, location)
+        {
+            HitPoints = hitPoints;
         }
 
-        public abstract void Move(Canvas stage, Rectangle playerBox, Rectangle batBox, Random random);
+        public abstract void Move(Canvas stage, Rectangle playerBox, Rectangle batBox, Random random, Point playerLocation);
 
         public void Hit(int maxDamage, Random random)
         {
@@ -45,18 +45,28 @@ namespace The_Mission
             return Nearby(stage, playerBox, batBox, NearPlayerDistance, false);
         }
 
-        //protected Direction FindPlayerDirection(Point playerLocation)
-        //{
-        //    Direction directionToMove;
-        //    if (playerLocation.X > location.X + 10)
-        //        directionToMove = Direction.Right;
-        //    else if (playerLocation.X < location.X - 10)
-        //        directionToMove = Direction.Left;
-        //    else if (playerLocation.Y < location.Y - 10)
-        //        directionToMove = Direction.Up;
-        //    else
-        //        directionToMove = Direction.Down;
-        //    return directionToMove;
-        //}
+        protected Direction FindPlayerDirection(Point playerLocation)
+        {
+            Direction directionToMove;
+
+            if (playerLocation.X > location.X + 10)
+            {
+                directionToMove = Direction.Right;
+            }
+            else if (playerLocation.X < location.X - 10)
+            {
+                directionToMove = Direction.Left;
+            }
+            else if (playerLocation.Y < location.Y - 10)
+            {
+                directionToMove = Direction.Up;
+            }
+            else
+            {
+                directionToMove = Direction.Down;
+            }
+
+            return directionToMove;
+        }
     }
 }

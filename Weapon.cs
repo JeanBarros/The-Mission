@@ -13,8 +13,8 @@ namespace The_Mission
     {
         public bool PickedUp { get; private set; }
 
-        public Weapon(Game game)
-            :base(game)
+        public Weapon(Game game, Point location)
+            :base(game, location)
         {
             PickedUp = false;
         }

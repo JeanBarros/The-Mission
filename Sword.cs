@@ -16,8 +16,8 @@ namespace The_Mission
         private readonly Rectangle sword;
 
         public override string Name { get { return "Sword"; } }
-        public Sword(Game game, Rectangle swordBox)
-            :base(game) 
+        public Sword(Game game, Rectangle swordBox, Point location)
+            :base(game, location) 
         {
             // Creates the bat into stage
             sword = swordBox;
@@ -30,7 +30,7 @@ namespace The_Mission
             swordTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/sword.png"));
             sword.Fill = swordTexture;
 
-            // Sets a bat random position
+            // Sets a Sword random position
             game.GetRandomLocation(sword);            
         }
 

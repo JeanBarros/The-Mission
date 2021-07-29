@@ -15,13 +15,13 @@ namespace The_Mission
 {
     public class Game
     {
-        private Player player;
+        public Player player;
         private Random random = new Random();
 
         public List<Enemy> Enemies { get; private set; }
         public Weapon WeaponInRoom { get; private set; }
 
-        //public Point PlayerLocation { get { return player.Location; } }
+        public Point PlayerLocation { get { return player.Location; } }
         public int PlayerHitPoints { get { return player.HitPoints; } }
         public IEnumerable<string> PlayerWeapons { get { return player.Weapons; } }
         private int level = 0;
@@ -37,7 +37,7 @@ namespace The_Mission
         {
             this.boundaries = boundaries;
 
-            player = new Player(this, playerBox);
+            player = new Player(this, playerBox, new Point(Canvas.GetLeft(playerBox), Canvas.GetTop(playerBox)));
 
             // Sets a position to spawn the player in the dungeon. For now it is setted up on XAML file.
             //Canvas.SetLeft(playerBox, 0);
@@ -50,13 +50,13 @@ namespace The_Mission
         /// <param name="playerBox"></param>
         /// <param name="direction"></param>
         /// <param name="random"></param>
-        public void Move(Rectangle playerBox, Rectangle batBox, Direction direction, Random random)
+        public void Move(Rectangle playerBox, Rectangle batBox, Direction direction, Random random, Point playerLocation)
         {
             player.Move(boundaries, playerBox, direction);
 
             foreach (Enemy enemy in Enemies)
             {
-                enemy.Move(boundaries, playerBox, batBox, random);
+                enemy.Move(boundaries, playerBox, batBox, random, playerLocation);
             }
         }
 
@@ -85,12 +85,12 @@ namespace The_Mission
             player.IncreaseHealth(health, random);
         }
 
-        public void Attack(Canvas stage, Rectangle playerBox, Rectangle batBox, Direction direction, Random random)
+        public void Attack(Canvas stage, Rectangle playerBox, Rectangle batBox, Direction direction, Random random, Point playerLocation)
         {
             player.Attack(stage, playerBox, batBox, direction, random);
             foreach (Enemy enemy in Enemies)
             {
-                enemy.Move(stage, playerBox, batBox, random);
+                enemy.Move(stage, playerBox, batBox, random, playerLocation);
             }
         }
 
@@ -101,16 +101,25 @@ namespace The_Mission
             Canvas.SetTop(character, random.Next(10, 270));
         }
 
-        public void NewLevel(Rectangle batBox, Rectangle swordBox)
+        private Point GetRandomLocation(Random random, Rectangle character)
+        {
+            // Sets a character random position
+            Canvas.SetLeft(character, random.Next(10, 434));
+            Canvas.SetTop(character, random.Next(10, 270));
+
+            return new Point(Canvas.GetLeft(character), Canvas.GetTop(character));
+        }
+
+        public void NewLevel(Rectangle batBox, Rectangle swordBox, Random random)
         {
             level++;
             switch (level)
             {
                 case 1:
                     Enemies = new List<Enemy>() {
-                        new Bat(this, batBox),
+                        new Bat(this, batBox, GetRandomLocation(random, batBox))
                     };
-                    WeaponInRoom = new Sword(this, swordBox);
+                    WeaponInRoom = new Sword(this, swordBox, GetRandomLocation(random, swordBox));
                     break;
                 default:
                     break;

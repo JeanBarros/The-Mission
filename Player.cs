@@ -30,8 +30,8 @@ namespace The_Mission
             }
         }
 
-        public Player(Game game, Rectangle playerBox)
-            : base(game)
+        public Player(Game game, Rectangle playerBox, Point location)
+            : base(game, location)
         {
             HitPoints = 10;
 
@@ -75,7 +75,8 @@ namespace The_Mission
 
         public void Move(Canvas stage, Rectangle playerBox, Direction direction)
         {
-            Move(playerBox, direction, game.Boundaries);
+            location = Move(playerBox, direction, game.Boundaries);
+
             if (!game.WeaponInRoom.PickedUp)
             {
                 // HitBox creates a box outside of the objects (bounds) which will be used to detect collision between two objects

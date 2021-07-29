@@ -134,10 +134,10 @@
     <Resource Include="Assets\Images\flail.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="dungeon01.jpg" />
+    <Resource Include="Assets\ToDoList.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\ToDoList.txt" />
+    <Resource Include="bat.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
