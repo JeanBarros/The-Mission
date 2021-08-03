@@ -37,13 +37,22 @@ namespace The_Mission
 
         public override void Move(Canvas stage, Rectangle playerBox, Rectangle batBox, Random random, Point playerLocation)
         {
-            Direction direction = FindPlayerDirection(playerLocation);
+            // Bat moves 50% randomly and 50% toward player direction
+            int[] options = new int[] { 0, 1 };
+            int index = random.Next(options.Length);
+            Console.WriteLine(options[index]);
 
-            location = Move(batBox, direction, game.Boundaries);
-
-            // Sets a bat random position
-            //Canvas.SetLeft(batBox, random.Next(10, 434));
-            //Canvas.SetTop(batBox, random.Next(10, 270));
+            if (options[index] == 0)
+            {
+                Direction direction = FindPlayerDirection(playerLocation);
+                location = Move(batBox, direction, game.Boundaries);
+            }
+            else
+            {
+                // Sets a bat random position
+                Canvas.SetLeft(batBox, random.Next(10, 434));
+                Canvas.SetTop(batBox, random.Next(10, 270));
+            }
 
             if (NearPlayer(stage, playerBox, batBox))
             {
