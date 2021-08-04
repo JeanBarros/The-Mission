@@ -92,7 +92,7 @@ namespace The_Mission
                 case "Sword":
                     weaponControl = swordBox;
                     break;
-            }            
+            }
 
             //weaponControl.Visibility = Visibility.Visible;
 
@@ -133,7 +133,7 @@ namespace The_Mission
         #endregion
 
         #region Attack
-        private void btnAttackUp_Click(object sender, RoutedEventArgs e)
+        private void BtnAttackUp_Click(object sender, RoutedEventArgs e)
         {
             game.Attack(Stage, playerBox, batBox, Motion.Direction.Up, random, playerLocation);
             UpdateCharacters();
@@ -143,6 +143,7 @@ namespace The_Mission
 
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
+            #region Moves using keyboard
             if (e.Key == Key.Up)
             {
                 game.Move(playerBox, batBox, Motion.Direction.Up, random, playerLocation);
@@ -163,6 +164,21 @@ namespace The_Mission
                 game.Move(playerBox, batBox, Motion.Direction.Right, random, playerLocation);
                 UpdateCharacters();
             }
+            #endregion
+
+            #region Attack using keyboard
+            if (e.Key == Key.NumPad8)
+            {
+                game.Attack(Stage, playerBox, batBox, Motion.Direction.Up, random, playerLocation);
+                UpdateCharacters();
+            }
+            #endregion
+        }
+
+        private void BtnReset_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
     }
 }

@@ -94,18 +94,11 @@ namespace The_Mission
             }
         }
 
-        public void GetRandomLocation(Rectangle character)
-        {
-            // Sets a character random position
-            Canvas.SetLeft(character, random.Next(10, 434));
-            Canvas.SetTop(character, random.Next(10, 270));
-        }
-
         private Point GetRandomLocation(Random random, Rectangle character)
         {
             // Sets a character random position
-            Canvas.SetLeft(character, random.Next(10, 434));
-            Canvas.SetTop(character, random.Next(10, 270));
+            Canvas.SetLeft(character, random.Next(10, 434) / 10 * 10);
+            Canvas.SetTop(character, random.Next(10, 270) / 10 * 10);
 
             return new Point(Canvas.GetLeft(character), Canvas.GetTop(character));
         }

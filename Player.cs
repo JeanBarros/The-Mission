@@ -35,16 +35,14 @@ namespace The_Mission
         {
             HitPoints = 10;
 
-            // Creates the player into stage
-            player = playerBox;
-            player.Tag = "Player";
-            player.Width = 80;
-            player.Height = 103;
-            //player.Margin = new Thickness(10);
-            //player.StrokeThickness = 2;
-            ImageBrush playerTexture = new ImageBrush();
-            playerTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/player.png"));
-            player.Fill = playerTexture;
+            // Creates the player into stage dynamically
+            //player = playerBox;
+            //player.Tag = "Player";
+            //player.Width = 80;
+            //player.Height = 103;
+            //ImageBrush playerTexture = new ImageBrush();
+            //playerTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/player.png"));
+            //player.Fill = playerTexture;
         }
 
         /// <summary>

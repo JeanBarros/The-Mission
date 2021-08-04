@@ -13,26 +13,23 @@ namespace The_Mission
 {
     class Bat : Enemy
     {
-        //private readonly Rectangle bat;
+        private readonly Rectangle bat;
 
         public override string Name { get { return "Bat"; } }
 
         public Bat(Game game, Rectangle batBox, Point location)
             : base(game, 6, location)
         {
-            // Creates the bat into stage
+            //Creates the bat into stage dinamically
             //bat = batBox;
             //bat.Tag = "Bat";
             //bat.Width = 50;
             //bat.Height = 50;
-            //player.Margin = new Thickness(10);
-            //player.StrokeThickness = 2;
             //ImageBrush batTexture = new ImageBrush();
             //batTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/bat.png"));
             //bat.Fill = batTexture;
 
-            // Sets a bat random position
-            // game.GetRandomLocation(bat);
+            //Stage.Children.Add(batBox);
         }
 
         public override void Move(Canvas stage, Rectangle playerBox, Rectangle batBox, Random random, Point playerLocation)
@@ -50,8 +47,8 @@ namespace The_Mission
             else
             {
                 // Sets a bat random position
-                Canvas.SetLeft(batBox, random.Next(10, 434));
-                Canvas.SetTop(batBox, random.Next(10, 270));
+                Canvas.SetLeft(batBox, random.Next(10, 434) / 10 * 10);
+                Canvas.SetTop(batBox, random.Next(10, 270) / 10 * 10);
             }
 
             if (NearPlayer(stage, playerBox, batBox))

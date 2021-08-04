@@ -77,13 +77,21 @@
                                 <Image Source="Assets/Images/bat.png" Width="50"/>-->
                             <Image Source="Assets/Images/ghost.png" Width="80"/>
                             <Image Source="Assets/Images/zombie.png" Width="70"/>
-                            <Rectangle Name="playerBox" Width="80" Height="103" Fill="Yellow" Canvas.Left="10" Canvas.Top="245" />
-                            <Rectangle Name="batBox" Tag="Bat" Width="50" Height="50" Canvas.Left="373" Canvas.Top="0" >
+                            <Rectangle Name="playerBox" Tag="Player" Width="80" Height="103" Canvas.Left="10" Canvas.Top="245" >
                                 <Rectangle.Fill>
-                                    <ImageBrush ImageSource="bat.png" Stretch="UniformToFill"/>
+                                    <ImageBrush ImageSource="Assets/Images/player.png" Stretch="UniformToFill"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                            <Rectangle Name="swordBox" Width="70" Height="52" Fill="#FFC35ABE" />
+                            <Rectangle Name="batBox" Tag="Bat" Width="50" Height="50" Canvas.Left="373" Canvas.Top="0" >
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="Assets/Images/bat.png" Stretch="UniformToFill"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Rectangle Name="swordBox" Tag="Sword" Width="70" Height="52" Canvas.Left="85" Canvas.Top="10" >
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="Assets/Images/sword.png" Stretch="UniformToFill"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
                         </Canvas>
                     </Border>
                 </Grid>
@@ -140,7 +148,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="1">
-                        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Width="40" Height="40" Cursor="Hand" Click="btnAttackUp_Click">
+                        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Width="40" Height="40" Cursor="Hand" Click="BtnAttackUp_Click">
                             <Button.Background>
                                 <ImageBrush ImageSource="Assets/Images/arrowuP.png" Stretch="UniformToFill"/>
                             </Button.Background>
@@ -162,6 +170,7 @@
                         </Button>
                     </Grid>
                 </Grid>
+                <Button Content="Reset" Name="BtnReset" Click="BtnReset_Click" Grid.Column="1" HorizontalAlignment="Left" Margin="49,56,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
             </Grid>
         </Grid>
 

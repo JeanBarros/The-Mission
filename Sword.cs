@@ -17,21 +17,18 @@ namespace The_Mission
 
         public override string Name { get { return "Sword"; } }
         public Sword(Game game, Rectangle swordBox, Point location)
-            :base(game, location) 
+            : base(game, location)
         {
-            // Creates the bat into stage
-            sword = swordBox;
-            sword.Tag = "Sword";
-            sword.Width = 70;
-            sword.Height = 52;
-            //player.Margin = new Thickness(10);
-            //player.StrokeThickness = 2;
-            ImageBrush swordTexture = new ImageBrush();
-            swordTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/sword.png"));
-            sword.Fill = swordTexture;
-
-            // Sets a Sword random position
-            game.GetRandomLocation(sword);            
+            // Creates the sword into stage dynamically
+            //sword = swordBox;
+            //sword.Tag = "Sword";
+            //sword.Width = 70;
+            //sword.Height = 52;
+            ////player.Margin = new Thickness(10);
+            ////player.StrokeThickness = 2;
+            //ImageBrush swordTexture = new ImageBrush();
+            //swordTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/sword.png"));
+            //sword.Fill = swordTexture;                       
         }
 
         public override void Attack(Canvas stage, Rectangle playerBox, Rectangle batBox, Direction direction, Random random, string weaponName)

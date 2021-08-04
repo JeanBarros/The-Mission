@@ -136,8 +136,5 @@
   <ItemGroup>
     <Resource Include="Assets\ToDoList.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bat.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
