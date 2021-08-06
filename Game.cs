@@ -110,9 +110,9 @@ namespace The_Mission
             {
                 case 1:
                     Enemies = new List<Enemy>() {
-                        new Bat(this, batBox, GetRandomLocation(random, batBox))
+                        new Bat(this, boundaries, batBox, GetRandomLocation(random, batBox))
                     };
-                    WeaponInRoom = new Sword(this, swordBox, GetRandomLocation(random, swordBox));
+                    WeaponInRoom = new Sword(this, boundaries, swordBox, GetRandomLocation(random, swordBox));
                     break;
                 default:
                     break;

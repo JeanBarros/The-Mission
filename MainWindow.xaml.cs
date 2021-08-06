@@ -31,7 +31,7 @@ namespace The_Mission
 
             game = new Game(Stage, playerBox, swordIcon);
             game.NewLevel(batBox, swordBox, random);
-            UpdateCharacters();
+            UpdateCharacters();            
         }
 
         public void UpdateCharacters()
@@ -55,6 +55,7 @@ namespace The_Mission
                         //MessageBox.Show($"{enemy.Name} died!");
                         //batBox.Visibility = Visibility.Hidden;
                         Stage.Children.Remove(batBox);
+                        Stage.Children.Remove(batBoxCollider);
                         batHitPoints.Content = $"Bat is dead!";
                     }
                     else
@@ -82,6 +83,7 @@ namespace The_Mission
                 game.Equip("Sword");
                 swordIcon.StrokeThickness = 2;
                 swordIcon.Stroke = Brushes.White;
+                Stage.Children.Remove(swordBoxCollider);
             }
 
             // Weapons in Room

@@ -17,7 +17,7 @@ namespace The_Mission
 
         public override string Name { get { return "Bat"; } }
 
-        public Bat(Game game, Rectangle batBox, Point location)
+        public Bat(Game game, Canvas stage, Rectangle batBox, Point location)
             : base(game, 6, location)
         {
             //Creates the bat into stage dinamically
@@ -30,6 +30,16 @@ namespace The_Mission
             //bat.Fill = batTexture;
 
             //Stage.Children.Add(batBox);
+
+            // Since Bat is created on a random location, this will set the collision box on the right bat position.
+            foreach (var item in stage.Children.OfType<Rectangle>())
+            {
+                if ((string)item.Tag == "batBoxCollider")
+                {
+                    Canvas.SetLeft(item, Canvas.GetLeft(batBox));
+                    Canvas.SetTop(item, Canvas.GetTop(batBox) + item.Height / 2);
+                }
+            }
         }
 
         public override void Move(Canvas stage, Rectangle playerBox, Rectangle batBox, Random random, Point playerLocation)

@@ -77,17 +77,20 @@
                                 <Image Source="Assets/Images/bat.png" Width="50"/>-->
                             <Image Source="Assets/Images/ghost.png" Width="80"/>
                             <Image Source="Assets/Images/zombie.png" Width="70"/>
-                            <Rectangle Name="playerBox" Tag="Player" Width="80" Height="103" Canvas.Left="10" Canvas.Top="245" >
+                            <Rectangle Name="playerBoxCollider" Tag="playerBoxCollider" Stroke="Cyan" Width="40" Height="55" Canvas.Left="32" Canvas.Top="270" Panel.ZIndex="1" />
+                            <Rectangle Name="batBoxCollider" Tag="batBoxCollider" Stroke="Magenta" Width="50" Height="23" Canvas.Left="373" Canvas.Top="13" Panel.ZIndex="1" />
+                            <Rectangle Name="swordBoxCollider" Tag="swordBoxCollider" Stroke="GreenYellow" Width="40" Height="30" Canvas.Left="96" Canvas.Top="24" Panel.ZIndex="1" />
+                            <Rectangle Name="playerBox" Tag="Player" Width="80" Height="103" Canvas.Left="10" Canvas.Top="245">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="Assets/Images/player.png" Stretch="UniformToFill"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                            <Rectangle Name="batBox" Tag="Bat" Width="50" Height="50" Canvas.Left="373" Canvas.Top="0" >
+                            <Rectangle Name="batBox" Tag="Bat" Width="50" Height="50" Canvas.Left="373" Canvas.Top="0">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="Assets/Images/bat.png" Stretch="UniformToFill"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                            <Rectangle Name="swordBox" Tag="Sword" Width="70" Height="52" Canvas.Left="85" Canvas.Top="10" >
+                            <Rectangle Name="swordBox" Tag="Sword" Width="70" Height="52" Canvas.Left="85" Canvas.Top="10">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="Assets/Images/sword.png" Stretch="UniformToFill"/>
                                 </Rectangle.Fill>

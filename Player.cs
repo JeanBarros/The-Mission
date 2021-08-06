@@ -16,9 +16,11 @@ namespace The_Mission
         private Rectangle player;
         private Weapon equippedWeapon;
 
+        private Rectangle swordBoxCollider = new Rectangle();
+
         public int HitPoints { get; private set; }
 
-        private List<Weapon> inventory = new List<Weapon>();        
+        private List<Weapon> inventory = new List<Weapon>();
         public IEnumerable<string> Weapons
         {
             get
@@ -79,13 +81,30 @@ namespace The_Mission
             {
                 // HitBox creates a box outside of the objects (bounds) which will be used to detect collision between two objects
                 // Divides width and height of the player by two only to make sure that he will pick up the weapon when closest of it.
-                Rect playerHitBox = new Rect(Canvas.GetLeft(playerBox), Canvas.GetTop(playerBox), (playerBox.Width / 2), (playerBox.Height / 2));
+                Rect playerHitBox = new Rect(Canvas.GetLeft(playerBoxCollider), Canvas.GetTop(playerBoxCollider), playerBoxCollider.Width, playerBoxCollider.Height);
 
                 foreach (var item in stage.Children.OfType<Rectangle>())
                 {
+                    if ((string)item.Tag == "playerBoxCollider")
+                    {
+                        playerBoxCollider = item;
+
+                        Canvas.SetLeft(item, Canvas.GetLeft(playerBox) + item.Width / 2);
+                        Canvas.SetTop(item, Canvas.GetTop(playerBox) + item.Height / 2);
+                    }
+
+                    if ((string)item.Tag == "swordBoxCollider")
+                    {
+                        swordBoxCollider = item;
+                    }
+
                     if ((string)item.Tag == "Sword")
                     {
-                        Rect weaponHitBox = new Rect(Canvas.GetLeft(item), Canvas.GetTop(item), item.Width, item.Height);
+                        Canvas.SetLeft(swordBoxCollider, Canvas.GetLeft(item) + swordBoxCollider.Width / 4);
+                        Canvas.SetTop(swordBoxCollider, Canvas.GetTop(item) + swordBoxCollider.Height / 2);
+
+                        Rect weaponHitBox = new Rect(Canvas.GetLeft(swordBoxCollider), Canvas.GetTop(swordBoxCollider), swordBoxCollider.Width, swordBoxCollider.Height);
+                        
                         if (playerHitBox.IntersectsWith(weaponHitBox))
                         {
                             //MessageBox.Show("Weapon Picked");
@@ -101,7 +120,7 @@ namespace The_Mission
         {
             foreach (Weapon weapon in inventory)
             {
-                if (equippedWeapon.Name == "Sword") 
+                if (equippedWeapon.Name == "Sword")
                 {
                     equippedWeapon.Attack(stage, playerBox, batBox, direction, random, equippedWeapon.Name);
                 }
