@@ -16,8 +16,6 @@ namespace The_Mission
         private Rectangle player;
         private Weapon equippedWeapon;
 
-        private Rectangle swordBoxCollider = new Rectangle();
-
         public int HitPoints { get; private set; }
 
         private List<Weapon> inventory = new List<Weapon>();
@@ -27,7 +25,10 @@ namespace The_Mission
             {
                 List<string> names = new List<string>();
                 foreach (Weapon weapon in inventory)
+                {
                     names.Add(weapon.Name);
+                }
+
                 return names;
             }
         }
@@ -104,12 +105,16 @@ namespace The_Mission
                         Canvas.SetTop(swordBoxCollider, Canvas.GetTop(item) + swordBoxCollider.Height / 2);
 
                         Rect weaponHitBox = new Rect(Canvas.GetLeft(swordBoxCollider), Canvas.GetTop(swordBoxCollider), swordBoxCollider.Width, swordBoxCollider.Height);
-                        
+
                         if (playerHitBox.IntersectsWith(weaponHitBox))
                         {
                             //MessageBox.Show("Weapon Picked");
                             game.WeaponInRoom.PickUpWeapon();
-                            inventory.Add(game.WeaponInRoom);                            
+                            inventory.Add(game.WeaponInRoom);
+
+                            // Sets the Sword Box Collider to the center of the Player Box Collider
+                            Canvas.SetLeft(swordBoxCollider, Canvas.GetLeft(playerBoxCollider));
+                            Canvas.SetTop(swordBoxCollider, Canvas.GetTop(playerBoxCollider) + (playerBoxCollider.Height - swordBoxCollider.Height) / 2);
                         }
                     }
                 }

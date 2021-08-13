@@ -87,7 +87,12 @@ namespace The_Mission
 
         public void Attack(Canvas stage, Rectangle playerBox, Rectangle batBox, Direction direction, Random random, Point playerLocation)
         {
-            player.Attack(stage, playerBox, batBox, direction, random);
+            // Check if Player exists
+            if (stage.Children.Contains(playerBox))
+            {
+                player.Attack(stage, playerBox, batBox, direction, random);
+            }
+            
             foreach (Enemy enemy in Enemies)
             {
                 enemy.Move(stage, playerBox, batBox, random, playerLocation);

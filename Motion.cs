@@ -16,11 +16,13 @@ namespace The_Mission
         protected Game game;
         protected Weapon weapon;
 
-        public Rect playerHitBox;
-        Rect batHitBox;
-        
-        public Rectangle playerBoxCollider = new Rectangle();
-        private Rectangle batBoxCollider = new Rectangle();
+        protected Rect playerHitBox;
+        protected Rect batHitBox;
+        protected Rect swordHitBox;
+
+        protected Rectangle playerBoxCollider = new Rectangle();
+        protected Rectangle batBoxCollider = new Rectangle();
+        protected Rectangle swordBoxCollider = new Rectangle();
 
         public enum Direction
         {
@@ -40,26 +42,19 @@ namespace The_Mission
         /// Checks if a enemy is within weapon range (radius). If they’re within distance of each other, then it returns true; otherwise, it returns false.
         /// </summary>
         /// <param name="stage"></param>
-        /// <param name="playerBox"></param>
-        /// <param name="distance"></param>
-        /// /// <param name="isPlayerAttacking"></param>
+        /// <param name="batBox"></param>
+        /// <param name="isPlayerAttacking"></param>
         /// <returns></returns>
-        public bool Nearby(Canvas stage, Rectangle playerBox, Rectangle batBox, int distance, bool isPlayerAttacking)
+        public bool Nearby(Canvas stage, Rectangle batBox, bool isPlayerAttacking)
         {
             // HitBox creates a box outside of the objects (bounds) which will be used to detect collision between two objects
             // Sword hit box needs to collide with Bat hit box using IntersectsWith method, which means the Bat is within sword range (radius).
 
-            Rect playerHitBox = new Rect(Canvas.GetLeft(playerBoxCollider), Canvas.GetTop(playerBoxCollider), playerBoxCollider.Width, playerBoxCollider.Height);
-            //Rect batHitBox = new Rect(Canvas.GetLeft(batBox), Canvas.GetTop(batBox), batBox.Width / 2, batBox.Height / 2); ;
-
             foreach (var item in stage.Children.OfType<Rectangle>())
             {
-                if ((string)item.Tag == "playerBoxCollider")
+                if ((string)item.Tag == "swordBoxCollider")
                 {
-                    playerBoxCollider = item;
-                    
-                    Canvas.SetLeft(item, Canvas.GetLeft(playerBox) + item.Width / 2);
-                    Canvas.SetTop(item, Canvas.GetTop(playerBox) + item.Height / 2);
+                    swordBoxCollider = item;
                 }
 
                 if ((string)item.Tag == "batBoxCollider")
@@ -75,18 +70,11 @@ namespace The_Mission
                 {
                     if ((string)item.Tag == "Bat")
                     {
-                        if (stage.Children.Contains(playerBox))
+                        batHitBox = new Rect(Canvas.GetLeft(batBoxCollider), Canvas.GetTop(batBoxCollider), batBoxCollider.Width, batBoxCollider.Height);
+                        if (swordHitBox.IntersectsWith(batHitBox))
                         {
-                            //Canvas.SetLeft(item, Canvas.GetLeft(playerBox) + item.Width / 2);
-                            //Canvas.SetTop(item, Canvas.GetTop(playerBox) + item.Height / 2);
-
-                            batHitBox = new Rect(Canvas.GetLeft(batBoxCollider), Canvas.GetTop(batBoxCollider), batBoxCollider.Width, batBoxCollider.Height);
-                            if (playerHitBox.IntersectsWith(batHitBox))
-                            {
-                                MessageBox.Show($"{item.Tag} says: Ouch!");
-
-                                return true;
-                            }
+                            MessageBox.Show($"{item.Tag} says: Ouch!");
+                            return true;
                         }
                     }
                 }
@@ -94,7 +82,7 @@ namespace The_Mission
                 {
                     if ((string)item.Tag == "Player")
                     {
-                        if (stage.Children.Contains(batBox))
+                        if (stage.Children.Contains(batBox)) // Check if Bat exists
                         {
                             playerHitBox = new Rect(Canvas.GetLeft(playerBoxCollider), Canvas.GetTop(playerBoxCollider), playerBoxCollider.Width, playerBoxCollider.Height);
                             batHitBox = new Rect(Canvas.GetLeft(batBoxCollider), Canvas.GetTop(batBoxCollider), batBoxCollider.Width, batBoxCollider.Height);
@@ -108,7 +96,7 @@ namespace The_Mission
                     }
                 }
             }
-            
+
             return false;
         }
 
@@ -121,6 +109,18 @@ namespace The_Mission
         /// <returns></returns>
         public Point Move(Rectangle character, Direction direction, Canvas boundaries)
         {
+            foreach (var item in boundaries.Children.OfType<Rectangle>())
+            {
+                if ((string)item.Tag == "playerBoxCollider")
+                {
+                    playerBoxCollider = item;
+                }
+                if ((string)item.Tag == "swordBoxCollider")
+                {
+                    swordBoxCollider = item;
+                }
+            }
+
             Point newLocation = location;
 
             switch (direction)
@@ -157,6 +157,16 @@ namespace The_Mission
                     break;
                 default: break;
             }
+
+            if ((string)character.Tag == "Player")
+            {
+                Canvas.SetLeft(playerBoxCollider, Canvas.GetLeft(character) + playerBoxCollider.Width / 2);
+                Canvas.SetTop(playerBoxCollider, Canvas.GetTop(character) + playerBoxCollider.Height / 2);
+
+                Canvas.SetLeft(swordBoxCollider, Canvas.GetLeft(playerBoxCollider));
+                Canvas.SetTop(swordBoxCollider, Canvas.GetTop(playerBoxCollider) + (playerBoxCollider.Height - swordBoxCollider.Height) / 2);
+            }
+
             return newLocation;
         }
     }

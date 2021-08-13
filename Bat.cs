@@ -13,25 +13,12 @@ namespace The_Mission
 {
     class Bat : Enemy
     {
-        private readonly Rectangle bat;
-
         public override string Name { get { return "Bat"; } }
 
         public Bat(Game game, Canvas stage, Rectangle batBox, Point location)
             : base(game, 6, location)
         {
-            //Creates the bat into stage dinamically
-            //bat = batBox;
-            //bat.Tag = "Bat";
-            //bat.Width = 50;
-            //bat.Height = 50;
-            //ImageBrush batTexture = new ImageBrush();
-            //batTexture.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/bat.png"));
-            //bat.Fill = batTexture;
-
-            //Stage.Children.Add(batBox);
-
-            // Since Bat is created on a random location, this will set the collision box on the right bat position.
+            // Since Bat is created on a random location, this will set the collision box on the same bat position.
             foreach (var item in stage.Children.OfType<Rectangle>())
             {
                 if ((string)item.Tag == "batBoxCollider")

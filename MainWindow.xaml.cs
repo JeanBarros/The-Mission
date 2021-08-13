@@ -83,7 +83,7 @@ namespace The_Mission
                 game.Equip("Sword");
                 swordIcon.StrokeThickness = 2;
                 swordIcon.Stroke = Brushes.White;
-                Stage.Children.Remove(swordBoxCollider);
+                //Stage.Children.Remove(swordBoxCollider);
             }
 
             // Weapons in Room
@@ -140,6 +140,22 @@ namespace The_Mission
             game.Attack(Stage, playerBox, batBox, Motion.Direction.Up, random, playerLocation);
             UpdateCharacters();
         }
+        private void BtnAttackDown_Click(object sender, RoutedEventArgs e)
+        {
+            game.Attack(Stage, playerBox, batBox, Motion.Direction.Down, random, playerLocation);
+            UpdateCharacters();
+        }
+        private void BtnAttackLeft_Click(object sender, RoutedEventArgs e)
+        {
+            game.Attack(Stage, playerBox, batBox, Motion.Direction.Left, random, playerLocation);
+            UpdateCharacters();
+        }
+
+        private void BtnAttackRight_Click(object sender, RoutedEventArgs e)
+        {
+            game.Attack(Stage, playerBox, batBox, Motion.Direction.Right, random, playerLocation);
+            UpdateCharacters();
+        }
 
         #endregion
 
@@ -172,6 +188,21 @@ namespace The_Mission
             if (e.Key == Key.NumPad8)
             {
                 game.Attack(Stage, playerBox, batBox, Motion.Direction.Up, random, playerLocation);
+                UpdateCharacters();
+            }
+            if (e.Key == Key.NumPad2)
+            {
+                game.Attack(Stage, playerBox, batBox, Motion.Direction.Down, random, playerLocation);
+                UpdateCharacters();
+            }
+            if (e.Key == Key.NumPad4)
+            {
+                game.Attack(Stage, playerBox, batBox, Motion.Direction.Left, random, playerLocation);
+                UpdateCharacters();
+            }
+            if (e.Key == Key.NumPad6)
+            {
+                game.Attack(Stage, playerBox, batBox, Motion.Direction.Right, random, playerLocation);
                 UpdateCharacters();
             }
             #endregion

@@ -42,7 +42,7 @@ namespace The_Mission
 
         protected bool NearPlayer(Canvas stage, Rectangle playerBox, Rectangle batBox)
         {
-            return Nearby(stage, playerBox, batBox, NearPlayerDistance, false);
+            return Nearby(stage, batBox, false);
         }
 
         protected Direction FindPlayerDirection(Point playerLocation)

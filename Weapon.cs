@@ -34,13 +34,11 @@ namespace The_Mission
             {
                 foreach (Enemy enemy in game.Enemies)
                 {
-                    if (Nearby(stage, playerBox, batBox, distance, true))
+                    if (Nearby(stage, batBox, true))
                     {
                         enemy.Hit(damage, random);
                         return true;
                     }
-
-                    //MessageBox.Show(enemy.Name);
                 }
             }
             return false;

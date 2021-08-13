@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:The_Mission"
         mc:Ignorable="d"
-        Title="The Mission" Height="650" ResizeMode="NoResize" Width="940" Focusable="True" KeyUp="KeyIsUp">
+        Title="The Mission" Height="650" ResizeMode="NoResize" Width="940" Focusable="True" KeyUp="KeyIsUp" WindowStartupLocation="CenterScreen">
 
     <Canvas>
         <Canvas.Background>
@@ -156,17 +156,17 @@
                                 <ImageBrush ImageSource="Assets/Images/arrowuP.png" Stretch="UniformToFill"/>
                             </Button.Background>
                         </Button>
-                        <Button HorizontalAlignment="Right" VerticalAlignment="Center" Height="40" Width="40">
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Center" Height="40" Width="40" Cursor="Hand" Click="BtnAttackRight_Click">
                             <Button.Background>
                                 <ImageBrush ImageSource="Assets/Images/arrowRight.png" Stretch="UniformToFill"/>
                             </Button.Background>
                         </Button>
-                        <Button HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="40">
+                        <Button HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="40" Cursor="Hand" Click="BtnAttackLeft_Click">
                             <Button.Background>
                                 <ImageBrush ImageSource="Assets/Images/arrowLeft.png" Stretch="UniformToFill"/>
                             </Button.Background>
                         </Button>
-                        <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="40" Height="40">
+                        <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="40" Height="40" Cursor="Hand" Click="BtnAttackDown_Click">
                             <Button.Background>
                                 <ImageBrush ImageSource="Assets/Images/arrowDown.png" Stretch="UniformToFill"/>
                             </Button.Background>
