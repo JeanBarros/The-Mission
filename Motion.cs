@@ -23,6 +23,7 @@ namespace The_Mission
         protected Rectangle playerBoxCollider = new Rectangle();
         protected Rectangle batBoxCollider = new Rectangle();
         protected Rectangle swordBoxCollider = new Rectangle();
+        protected Rectangle greenPotionBoxCollider = new Rectangle();
 
         public enum Direction
         {
@@ -56,7 +57,10 @@ namespace The_Mission
                 {
                     swordBoxCollider = item;
                 }
-
+                if ((string)item.Tag == "greenPotionBoxCollider")
+                {
+                    greenPotionBoxCollider = item;
+                }
                 if ((string)item.Tag == "batBoxCollider")
                 {
                     batBoxCollider = item;
@@ -118,6 +122,10 @@ namespace The_Mission
                 if ((string)item.Tag == "swordBoxCollider")
                 {
                     swordBoxCollider = item;
+                }
+                if ((string)item.Tag == "greenPotionBoxCollider")
+                {
+                    greenPotionBoxCollider = item;
                 }
             }
 

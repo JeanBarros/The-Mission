@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 namespace The_Mission
 {
-    class Bat : Enemy
+    public class Bat : Enemy
     {
         public override string Name { get { return "Bat"; } }
 

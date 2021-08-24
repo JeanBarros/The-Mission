@@ -108,7 +108,7 @@ namespace The_Mission
             return new Point(Canvas.GetLeft(character), Canvas.GetTop(character));
         }
 
-        public void NewLevel(Rectangle batBox, Rectangle swordBox, Random random)
+        public void NewLevel(Rectangle batBox, Rectangle swordBox, Rectangle greenPotionBox, Random random)
         {
             level++;
             switch (level)
@@ -118,6 +118,12 @@ namespace The_Mission
                         new Bat(this, boundaries, batBox, GetRandomLocation(random, batBox))
                     };
                     WeaponInRoom = new Sword(this, boundaries, swordBox, GetRandomLocation(random, swordBox));
+                    break;
+                case 2:
+                    Enemies = new List<Enemy>() {
+                        new Bat(this, boundaries, batBox, GetRandomLocation(random, batBox))
+                    };
+                    WeaponInRoom = new GreenPotion(this, boundaries, greenPotionBox, GetRandomLocation(random, greenPotionBox));
                     break;
                 default:
                     break;

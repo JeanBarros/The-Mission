@@ -38,8 +38,15 @@
                     </Rectangle>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Image Source="Assets/Images/greenPotion.png" Width="45"/>
+                    <Rectangle Name="greenPotionIcon" Margin="52,9,53,10" Visibility="Hidden">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="Assets/Images/greenPotion.png" Stretch="Uniform"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
                 </Grid>
+                <!--<Grid Grid.Column="1">
+                    <Image Source="Assets/Images/greenPotion.png" Width="45"/>
+                </Grid>-->
                 <Grid Grid.Column="2">
                     <Image Source="Assets/Images/redPotion.png" Width="45"/>
                 </Grid>
@@ -80,6 +87,7 @@
                             <Rectangle Name="playerBoxCollider" Tag="playerBoxCollider" Stroke="Cyan" Width="40" Height="55" Canvas.Left="32" Canvas.Top="270" Panel.ZIndex="1" />
                             <Rectangle Name="batBoxCollider" Tag="batBoxCollider" Stroke="Magenta" Width="50" Height="23" Canvas.Left="373" Canvas.Top="13" Panel.ZIndex="1" />
                             <Rectangle Name="swordBoxCollider" Tag="swordBoxCollider" Stroke="GreenYellow" Width="40" Height="30" Canvas.Left="96" Canvas.Top="24" Panel.ZIndex="1" />
+                            <Rectangle Name="greenPotionBoxCollider" Tag="greenPotionBoxCollider" Stroke="HotPink" Width="28" Height="26" Canvas.Left="169" Canvas.Top="25" Panel.ZIndex="1" />
                             <Rectangle Name="playerBox" Tag="Player" Width="80" Height="103" Canvas.Left="10" Canvas.Top="245">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="Assets/Images/player.png" Stretch="UniformToFill"/>
@@ -93,6 +101,11 @@
                             <Rectangle Name="swordBox" Tag="Sword" Width="70" Height="52" Canvas.Left="85" Canvas.Top="10">
                                 <Rectangle.Fill>
                                     <ImageBrush ImageSource="Assets/Images/sword.png" Stretch="UniformToFill"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Rectangle Name="greenPotionBox" Tag="GreenPotion" Width="45" Height="45" Canvas.Left="160" Canvas.Top="10">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="Assets/Images/greenPotion.png" Stretch="UniformToFill"/>
                                 </Rectangle.Fill>
                             </Rectangle>
                         </Canvas>

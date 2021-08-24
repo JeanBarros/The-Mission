@@ -99,6 +99,11 @@ namespace The_Mission
                         swordBoxCollider = item;
                     }
 
+                    if ((string)item.Tag == "greenPotionBoxCollider")
+                    {
+                        greenPotionBoxCollider = item;
+                    }
+
                     if ((string)item.Tag == "Sword")
                     {
                         Canvas.SetLeft(swordBoxCollider, Canvas.GetLeft(item) + swordBoxCollider.Width / 4);
@@ -115,6 +120,24 @@ namespace The_Mission
                             // Sets the Sword Box Collider to the center of the Player Box Collider
                             Canvas.SetLeft(swordBoxCollider, Canvas.GetLeft(playerBoxCollider));
                             Canvas.SetTop(swordBoxCollider, Canvas.GetTop(playerBoxCollider) + (playerBoxCollider.Height - swordBoxCollider.Height) / 2);
+                        }
+                    }
+                    if ((string)item.Tag == "GreenPotion")
+                    {
+                        Canvas.SetLeft(greenPotionBoxCollider, Canvas.GetLeft(item) + greenPotionBoxCollider.Width / 4);
+                        Canvas.SetTop(greenPotionBoxCollider, Canvas.GetTop(item) + greenPotionBoxCollider.Height / 2);
+
+                        Rect greenPotionHitBox = new Rect(Canvas.GetLeft(greenPotionBoxCollider), Canvas.GetTop(greenPotionBoxCollider), greenPotionBoxCollider.Width, greenPotionBoxCollider.Height);
+
+                        if (playerHitBox.IntersectsWith(greenPotionHitBox))
+                        {
+                            //MessageBox.Show("Weapon Picked");
+                            game.WeaponInRoom.PickUpWeapon();
+                            inventory.Add(game.WeaponInRoom);
+
+                            // Sets the Sword Box Collider to the center of the Player Box Collider
+                            Canvas.SetLeft(greenPotionBoxCollider, Canvas.GetLeft(playerBoxCollider));
+                            Canvas.SetTop(greenPotionBoxCollider, Canvas.GetTop(playerBoxCollider) + (playerBoxCollider.Height - greenPotionBoxCollider.Height) / 2);
                         }
                     }
                 }

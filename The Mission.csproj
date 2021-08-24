@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bat.cs" />
+    <Compile Include="GreenPotion.cs" />
     <Compile Include="Sword.cs" />
     <Compile Include="Weapon.cs" />
     <Page Include="MainWindow.xaml">

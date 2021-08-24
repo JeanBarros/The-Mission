@@ -23,14 +23,14 @@ namespace The_Mission
     {
         private Game game;
         private Random random = new Random();
-        Point playerLocation;
+        Point playerLocation, batLocation;
 
         public MainWindow()
         {
             InitializeComponent();
 
             game = new Game(Stage, playerBox, swordIcon);
-            game.NewLevel(batBox, swordBox, random);
+            game.NewLevel(batBox, swordBox, greenPotionBox, random);
             UpdateCharacters();            
         }
 
@@ -48,28 +48,67 @@ namespace The_Mission
             {
                 if (enemy is Bat)
                 {
+                    batLocation = enemy.Location;
                     batHitPoints.Content = $"Bat: {enemy.HitPoints.ToString()}";
-                    if (enemy.Dead)
-                    {
-                        showBat = false;
-                        //MessageBox.Show($"{enemy.Name} died!");
-                        //batBox.Visibility = Visibility.Hidden;
-                        Stage.Children.Remove(batBox);
-                        Stage.Children.Remove(batBoxCollider);
-                        batHitPoints.Content = $"Bat is dead!";
-                    }
-                    else
+
+                    if (enemy.HitPoints > 0)
                     {
                         showBat = true;
                         enemiesShown++;
                     }
-                }
-            }
 
-            if (game.PlayerHitPoints <= 0)
-            {
-                Stage.Children.Remove(playerBox);
-                playerHitPoints.Content = $"Player is dead!";
+                    //if (enemy.Dead)
+                    //{
+                    //    showBat = false;
+                    //    //MessageBox.Show($"{enemy.Name} died!");
+                    //    //batBox.Visibility = Visibility.Hidden;
+                    //    Stage.Children.Remove(batBox);
+                    //    Stage.Children.Remove(batBoxCollider);
+                    //    batHitPoints.Content = $"Bat is dead!";
+                    //}
+                    //else
+                    //{
+                    //    showBat = true;
+                    //    enemiesShown++;
+                    //}
+                }
+
+                swordBox.Visibility = Visibility.Hidden;
+                greenPotionBox.Visibility = Visibility.Hidden;
+                //bow.Visibility = Visibility.Hidden;
+                //bluePotion.Visibility = Visibility.Hidden;
+                //mace.Visibility = Visibility.Hidden;
+
+                // Weapons in Room
+                Rectangle weaponControl = null;
+
+                switch (game.WeaponInRoom.Name)
+                {
+                    case "Sword":
+                        weaponControl = swordBox;
+                        break;
+                    case "Green Potion":
+                        weaponControl = greenPotionBox;
+                        break;
+                }
+
+                weaponControl.Visibility = Visibility.Visible;
+
+                if (game.WeaponInRoom.PickedUp)
+                {
+                    weaponControl.Visibility = Visibility.Hidden;
+                    //game.Equip(weaponControl.Name);
+                }
+                else
+                {
+                    weaponControl.Visibility = Visibility.Visible;
+                }
+
+                if (game.PlayerHitPoints <= 0)
+                {
+                    Stage.Children.Remove(playerBox);
+                    playerHitPoints.Content = $"Player is dead!";
+                }
             }
 
             // If the weapon is the only one that the player has, equip it immediately.
@@ -83,29 +122,25 @@ namespace The_Mission
                 game.Equip("Sword");
                 swordIcon.StrokeThickness = 2;
                 swordIcon.Stroke = Brushes.White;
+                swordIcon.Visibility = Visibility.Visible;
                 //Stage.Children.Remove(swordBoxCollider);
             }
-
-            // Weapons in Room
-            Rectangle weaponControl = null;
-
-            switch (game.WeaponInRoom.Name)
+            if (game.CheckPlayerInventory("GreenPotion"))
             {
-                case "Sword":
-                    weaponControl = swordBox;
-                    break;
+                greenPotionIcon.StrokeThickness = 2;
+                greenPotionIcon.Stroke = Brushes.White;
+                greenPotionIcon.Visibility = Visibility.Visible;
             }
 
-            //weaponControl.Visibility = Visibility.Visible;
-
-            if (game.WeaponInRoom.PickedUp)
+            if (enemiesShown < 1)
             {
-                weaponControl.Visibility = Visibility.Hidden;
-                swordIcon.Visibility = Visibility.Visible;
-                game.Equip(weaponControl.Name);
+                if (game.Level < 3)
+                {
+                    MessageBox.Show("You have defeated the enemies on this level");
+                    game.NewLevel(batBox, swordBox, greenPotionBox, random);
+                    UpdateCharacters();
+                }
             }
-            else
-                weaponControl.Visibility = Visibility.Visible;
         }
 
         #region Moves
